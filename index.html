@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Mandi - Online Agriculture Marketplace</title>
+
+  <!-- Font Awesome Icons - FREE CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+       Logo: Using Font Awesome icon (fa-seedling)
+       When your logo.png is ready, remove <i> tag and add <img> instead
+  ============================================================ -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+
+      <div class="navbar-logo">
+        <i class="fa-solid fa-seedling logo-img" style="font-size: 28px; color: #4CAF50;"></i>
+        <span class="logo-text">Digital Mandi</span>
+      </div>
+
+      <ul class="navbar-links">
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#market-prices">Market Prices</a></li>
+        <li><a href="#who-we-serve">Who We Serve</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="navbar-actions">
+        <a href="pages/login.html" class="btn btn-outline">Login</a>
+        <a href="pages/register.html" class="btn btn-primary">Register Now</a>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       HERO SECTION
+       Background: Green color is set in CSS (instead of hero-bg.jpg)
+       Right Image: Free farm image from Unsplash (online URL)
+       When your hero-farmer.png is ready, replace the src value
+  ============================================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+
+      <div class="hero-text">
+        <p class="hero-tagline">Pakistan's #1 Agriculture Marketplace</p>
+        <h1 class="hero-heading">Sell Your Crops Directly. <span>No Middleman.</span></h1>
+        <p class="hero-desc">
+          Digital Mandi connects farmers directly with buyers. Get fair prices,
+          secure payments, and certified agricultural products — all in one place.
+        </p>
+        <div class="hero-buttons">
+          <a href="pages/register.html" class="btn btn-primary btn-large">Get Started Free</a>
+          <a href="#how-it-works" class="btn btn-outline-white btn-large">How It Works</a>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <!-- Replace with assets/images/hero-farmer.png when ready -->
+        <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=600&q=80" alt="Farmer using Digital Mandi" />
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       STATS BAR
+       No images or icons needed here - numbers only
+  ============================================================ -->
+  <section class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-number">5000+</span>
+        <span class="stat-label">Registered Farmers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">0%</span>
+        <span class="stat-label">Commission Fee</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Secure Payments</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">500+</span>
+        <span class="stat-label">Certified Shopkeepers</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       HOW IT WORKS SECTION
+       Icons: Using Font Awesome icons
+       When your icon images are ready, replace <i> tag with <img>
+  ============================================================ -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>How Digital Mandi Works</h2>
+        <p>Simple 4 steps from listing to delivery</p>
+      </div>
+
+      <div class="steps-grid">
+
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-icon">
+            <!-- Replace with assets/images/icon-register.png when ready -->
+            <i class="fa-solid fa-user-plus" style="font-size: 32px; color: #2E7D32;"></i>
+          </div>
+          <h4>Register & Login</h4>
+          <p>Sign up as a Farmer, Buyer, or Shopkeeper. Each role gets its own dashboard.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-icon">
+            <!-- Replace with assets/images/icon-list.png when ready -->
+            <i class="fa-solid fa-wheat-awn" style="font-size: 32px; color: #2E7D32;"></i>
+          </div>
+          <h4>List Your Crops</h4>
+          <p>Farmers add their crops with photos, quantity, location, and asking price.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-icon">
+            <!-- Replace with assets/images/icon-deal.png when ready -->
+            <i class="fa-solid fa-handshake" style="font-size: 32px; color: #2E7D32;"></i>
+          </div>
+          <h4>Deal & Pay Securely</h4>
+          <p>Buyer sends offer, farmer accepts. Payment goes into escrow until delivery.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <div class="step-icon">
+            <!-- Replace with assets/images/icon-delivery.png when ready -->
+            <i class="fa-solid fa-truck" style="font-size: 32px; color: #2E7D32;"></i>
+          </div>
+          <h4>Delivery & Payment Release</h4>
+          <p>Delivery man delivers the crop. Payment releases to farmer after confirmation.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FEATURES SECTION
+       Left Image: Free farm image from Unsplash (online URL)
+       Feature Icons: Using Font Awesome icons
+       When your images and icons are ready, replace src and <i> tags
+  ============================================================ -->
+  <section class="section features-section" id="features">
+    <div class="container">
+
+      <div class="features-layout">
+
+        <div class="features-image">
+          <!-- Replace with assets/images/features-farm.jpg when ready -->
+          <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&q=80" alt="Farm fields" />
+        </div>
+
+        <div class="features-list">
+          <div class="section-header left-align">
+            <h2>Why Choose Digital Mandi?</h2>
+            <p>Everything you need for fair agricultural trade</p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <!-- Replace with assets/images/icon-no-middleman.png when ready -->
+              <i class="fa-solid fa-ban" style="font-size: 22px; color: #2E7D32;"></i>
+            </div>
+            <div class="feature-text">
+              <h4>No Middleman (Arthiya)</h4>
+              <p>Farmers and buyers deal directly. No commission agents taking your profit.</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <!-- Replace with assets/images/icon-escrow.png when ready -->
+              <i class="fa-solid fa-shield-halved" style="font-size: 22px; color: #2E7D32;"></i>
+            </div>
+            <div class="feature-text">
+              <h4>Escrow Payment System</h4>
+              <p>Money is held safely and only released after successful delivery.</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <!-- Replace with assets/images/icon-certified.png when ready -->
+              <i class="fa-solid fa-certificate" style="font-size: 22px; color: #2E7D32;"></i>
+            </div>
+            <div class="feature-text">
+              <h4>Certified Products</h4>
+              <p>All seeds, fertilizers, and sprays are verified by registered shopkeepers.</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <!-- Replace with assets/images/icon-govt-price.png when ready -->
+              <i class="fa-solid fa-chart-line" style="font-size: 22px; color: #2E7D32;"></i>
+            </div>
+            <div class="feature-text">
+              <h4>Government Market Prices</h4>
+              <p>Official prices always visible so no one can cheat you on rates.</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <!-- Replace with assets/images/icon-rating.png when ready -->
+              <i class="fa-solid fa-star" style="font-size: 22px; color: #2E7D32;"></i>
+            </div>
+            <div class="feature-text">
+              <h4>Ratings & Feedback</h4>
+              <p>Rate farmers and shopkeepers after every deal. Trust is built through reviews.</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <!-- Replace with assets/images/icon-truck.png when ready -->
+              <i class="fa-solid fa-truck-fast" style="font-size: 22px; color: #2E7D32;"></i>
+            </div>
+            <div class="feature-text">
+              <h4>Delivery System</h4>
+              <p>Dedicated delivery personnel transport crops safely from farm to buyer.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       MARKET PRICES SECTION
+       No images or icons needed here - table only
+  ============================================================ -->
+  <section class="section market-section" id="market-prices">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>Today's Government Market Prices</h2>
+        <p>Official rates updated regularly - so you always know the fair price</p>
+      </div>
+
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Crop / Product</th>
+              <th>Unit</th>
+              <th>Govt. Price (Rs.)</th>
+              <th>Category</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Wheat (Gandum)</td>
+              <td>40 kg</td>
+              <td>3,900</td>
+              <td>Crop</td>
+            </tr>
+            <tr>
+              <td>Rice - Basmati</td>
+              <td>40 kg</td>
+              <td>7,200</td>
+              <td>Crop</td>
+            </tr>
+            <tr>
+              <td>Sugarcane (Ganna)</td>
+              <td>40 kg</td>
+              <td>425</td>
+              <td>Crop</td>
+            </tr>
+            <tr>
+              <td>Cotton (Kapas)</td>
+              <td>40 kg</td>
+              <td>8,500</td>
+              <td>Crop</td>
+            </tr>
+            <tr>
+              <td>Maize (Makki)</td>
+              <td>40 kg</td>
+              <td>2,100</td>
+              <td>Crop</td>
+            </tr>
+            <tr>
+              <td>DAP Fertilizer</td>
+              <td>50 kg bag</td>
+              <td>9,400</td>
+              <td>Fertilizer</td>
+            </tr>
+            <tr>
+              <td>Urea Fertilizer</td>
+              <td>50 kg bag</td>
+              <td>3,500</td>
+              <td>Fertilizer</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="price-note">
+        Prices shown are official Government of Pakistan rates. Last updated: March 2026.
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       WHO WE SERVE SECTION
+       Images: Free role images from Unsplash (online URLs)
+       When your own card images are ready, replace the src values
+  ============================================================ -->
+  <section class="section" id="who-we-serve">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>Who Uses Digital Mandi?</h2>
+        <p>A platform built for every participant in the agriculture chain</p>
+      </div>
+
+      <div class="actors-grid">
+
+        <div class="actor-card">
+          <div class="actor-image">
+            <!-- Replace with assets/images/farmer-card.jpg when ready -->
+            <img src="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=200&h=200&fit=crop&q=80" alt="Farmer" />
+          </div>
+          <h4>Farmer</h4>
+          <p>List your crops and get fair prices directly from buyers. No commission agents.</p>
+          <a href="pages/register.html" class="btn btn-outline">Join as Farmer</a>
+        </div>
+
+        <div class="actor-card">
+          <div class="actor-image">
+            <!-- Replace with assets/images/buyer-card.jpg when ready -->
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=200&h=200&fit=crop&q=80" alt="Buyer" />
+          </div>
+          <h4>Buyer</h4>
+          <p>Purchase fresh crops directly from farmers at government fair rates.</p>
+          <a href="pages/register.html" class="btn btn-outline">Join as Buyer</a>
+        </div>
+
+        <div class="actor-card">
+          <div class="actor-image">
+            <!-- Replace with assets/images/shopkeeper-card.jpg when ready -->
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=200&h=200&fit=crop&q=80" alt="Shopkeeper" />
+          </div>
+          <h4>Shopkeeper</h4>
+          <p>Sell certified seeds, fertilizers, and sprays directly to farmers.</p>
+          <a href="pages/register.html" class="btn btn-outline">Join as Shopkeeper</a>
+        </div>
+
+        <div class="actor-card">
+          <div class="actor-image">
+            <!-- Replace with assets/images/delivery-card.jpg when ready -->
+            <img src="https://images.unsplash.com/photo-1618077360395-f3068be8e001?w=200&h=200&fit=crop&q=80" alt="Delivery Man" />
+          </div>
+          <h4>Delivery Man</h4>
+          <p>Earn income by delivering crops and products safely to buyers.</p>
+          <a href="pages/register.html" class="btn btn-outline">Join as Delivery Man</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CALL TO ACTION (CTA) SECTION
+       No images needed - green background is set in CSS
+  ============================================================ -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2>Ready to Join Digital Mandi?</h2>
+      <p>Join thousands of farmers and buyers already trading fairly. Registration is completely free.</p>
+      <div class="cta-buttons">
+        <a href="pages/register.html" class="btn btn-primary btn-large">Register Now - It's Free</a>
+        <a href="pages/login.html" class="btn btn-outline-white btn-large">Already Have Account? Login</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+       Logo: Using Font Awesome icon for now
+       When your logo-white.png is ready, replace <i> tag with <img>
+  ============================================================ -->
+  <footer class="footer" id="contact">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <!-- Replace with assets/images/logo-white.png when ready -->
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+          <i class="fa-solid fa-seedling footer-logo" style="font-size: 26px; color: #4CAF50;"></i>
+          <span style="font-size:1.2rem; font-weight:700; color:#fff; font-family:Georgia,serif;">Digital Mandi</span>
+        </div>
+        <p>Pakistan's trusted online agriculture marketplace. Connecting farmers, buyers, and shopkeepers directly.</p>
+      </div>
+
+      <div class="footer-links">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#market-prices">Market Prices</a></li>
+          <li><a href="pages/login.html">Login</a></li>
+          <li><a href="pages/register.html">Register</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h5>For Users</h5>
+        <ul>
+          <li><a href="#">Farmer Guide</a></li>
+          <li><a href="#">Buyer Guide</a></li>
+          <li><a href="#">Shopkeeper Guide</a></li>
+          <li><a href="#">Delivery Man Guide</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h5>Contact Us</h5>
+        <p>Email: info@digitalmandi.pk</p>
+        <p>Phone: 0311-1234567</p>
+        <p>Faisalabad, Punjab, Pakistan</p>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>Copyright 2026 Digital Mandi. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+
+</body>
+</html>

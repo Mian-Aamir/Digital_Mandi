@@ -1,0 +1,730 @@
+/* ============================================================
+   Digital Mandi — index.css
+   Homepage styling only.
+   ============================================================ */
+
+
+/* ── 1. GOOGLE FONTS ── */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather:wght@700&display=swap');
+
+
+/* ── 2. CSS VARIABLES (change colors here) ── */
+:root {
+  --green-dark:    #1B5E20;   /* darkest green - headings */
+  --green-main:    #2E7D32;   /* main green - buttons, navbar */
+  --green-light:   #4CAF50;   /* light green - accents */
+  --green-pale:    #E8F5E9;   /* very light green - backgrounds */
+  --green-border:  #C8E6C9;   /* light green - borders */
+
+  --gold:          #F9A825;   /* gold/yellow - highlight button */
+
+  --white:         #FFFFFF;
+  --bg:            #F5F9F5;   /* page background */
+  --text-dark:     #1A2E1A;   /* main text */
+  --text-mid:      #4A604A;   /* paragraph text */
+  --text-light:    #7A927A;   /* small text, hints */
+  --border:        #DCE8DC;
+
+  --font-heading:  'Merriweather', Georgia, serif;
+  --font-body:     'Poppins', sans-serif;
+
+  --radius:        10px;
+  --radius-lg:     18px;
+  --shadow:        0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg:     0 8px 40px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ── 3. RESET & BASE ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--text-dark);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+
+/* ── 4. TYPOGRAPHY ── */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading);
+  color: var(--green-dark);
+  line-height: 1.25;
+}
+
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.1rem; }
+h5 { font-size: 0.95rem; }
+
+p {
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+
+
+/* ── 5. CONTAINER ── */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+
+/* ── 6. BUTTONS ── */
+.btn {
+  display: inline-block;
+  padding: 11px 24px;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+/* Green filled button */
+.btn-primary {
+  background-color: var(--green-main);
+  color: var(--white);
+  border-color: var(--green-main);
+}
+
+.btn-primary:hover {
+  background-color: var(--green-dark);
+  border-color: var(--green-dark);
+  transform: translateY(-2px);
+}
+
+/* Green outline button */
+.btn-outline {
+  background-color: transparent;
+  color: var(--green-main);
+  border-color: var(--green-main);
+}
+
+.btn-outline:hover {
+  background-color: var(--green-pale);
+  transform: translateY(-2px);
+}
+
+/* White outline button (used on dark/green backgrounds) */
+.btn-outline-white {
+  background-color: transparent;
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.btn-outline-white:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Larger button */
+.btn-large {
+  padding: 14px 32px;
+  font-size: 1rem;
+  border-radius: var(--radius-lg);
+}
+
+
+/* ── 7. SECTION COMMON ── */
+.section {
+  padding: 80px 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-header h2 {
+  margin-bottom: 10px;
+}
+
+.section-header p {
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+.section-header.left-align {
+  text-align: left;
+}
+
+
+/* ── 8. NAVBAR ── */
+.navbar {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.navbar-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+/* Logo area */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  height: 40px;
+  width: auto;
+  /* IMAGE: assets/images/logo.png */
+}
+
+.logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+/* Navigation links */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navbar-links a {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-mid);
+  transition: color 0.2s;
+}
+
+.navbar-links a:hover {
+  color: var(--green-main);
+}
+
+/* Login + Register buttons */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* ── 9. HERO SECTION ── */
+.hero {
+  background-color: var(--green-dark);
+  /* Optional: add hero background image via CSS if needed */
+  /* background-image: url('../assets/images/hero-bg.jpg');
+     background-size: cover;
+     background-position: center; */
+  padding: 90px 24px;
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+/* Left: Text */
+.hero-text {
+  flex: 1;
+  max-width: 560px;
+}
+
+.hero-tagline {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #A5D6A7;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 99px;
+  margin-bottom: 18px;
+  letter-spacing: 0.04em;
+}
+
+.hero-heading {
+  color: var(--white);
+  font-size: 2.8rem;
+  margin-bottom: 18px;
+  line-height: 1.2;
+}
+
+.hero-heading span {
+  color: #A5D6A7;   /* light green highlight */
+}
+
+.hero-desc {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1rem;
+  margin-bottom: 32px;
+  line-height: 1.75;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Right: Image */
+.hero-image {
+  flex: 1;
+  max-width: 480px;
+  /* IMAGE: assets/images/hero-farmer.png */
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+}
+
+
+/* ── 10. STATS BAR ── */
+.stats-bar {
+  background-color: var(--green-main);
+  padding: 28px 24px;
+}
+
+.stats-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  text-align: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--white);
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 500;
+}
+
+
+/* ── 11. HOW IT WORKS ── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.step-card {
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-color: var(--green-main);
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.step-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 14px;
+  /* ICON IMAGE will go here */
+}
+
+.step-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.step-card h4 {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.step-card p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+
+/* ── 12. FEATURES SECTION ── */
+.features-section {
+  background-color: var(--green-pale);
+}
+
+.features-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.features-image img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  /* IMAGE: assets/images/features-farm.jpg */
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--green-border);
+}
+
+.feature-item:last-child {
+  border-bottom: none;
+}
+
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background-color: var(--white);
+  border: 1px solid var(--green-border);
+  border-radius: var(--radius);
+  padding: 8px;
+  /* ICON IMAGE will go here */
+}
+
+.feature-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.feature-text h4 {
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+
+.feature-text p {
+  font-size: 0.83rem;
+  color: var(--text-light);
+}
+
+
+/* ── 13. MARKET PRICES TABLE ── */
+.market-section {
+  background-color: var(--white);
+}
+
+.price-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.price-table thead {
+  background-color: var(--green-main);
+}
+
+.price-table thead th {
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  padding: 14px 20px;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.price-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.price-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.price-table tbody tr:hover {
+  background-color: var(--green-pale);
+}
+
+.price-table tbody td {
+  padding: 13px 20px;
+  color: var(--text-mid);
+}
+
+.price-table tbody td:nth-child(3) {
+  font-weight: 600;
+  color: var(--green-dark);
+}
+
+.price-note {
+  margin-top: 14px;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  text-align: center;
+}
+
+
+/* ── 14. WHO WE SERVE ── */
+.actors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.actor-card {
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.actor-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--green-main);
+  box-shadow: var(--shadow-lg);
+}
+
+.actor-image {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  border: 3px solid var(--green-border);
+  background-color: var(--green-pale);
+  /* ROLE IMAGE will go here */
+}
+
+.actor-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.actor-card h4 {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: var(--green-dark);
+}
+
+.actor-card p {
+  font-size: 0.83rem;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+
+/* ── 15. CALL TO ACTION ── */
+.cta-section {
+  background-color: var(--green-dark);
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.cta-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.cta-section h2 {
+  color: var(--white);
+  font-size: 2.2rem;
+  margin-bottom: 14px;
+}
+
+.cta-section p {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1rem;
+  margin-bottom: 32px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+/* ── 16. FOOTER ── */
+.footer {
+  background-color: #0D3B11;
+  padding: 60px 24px 0;
+}
+
+.footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-logo {
+  height: 38px;
+  width: auto;
+  margin-bottom: 14px;
+  /* IMAGE: assets/images/logo-white.png */
+}
+
+.footer-brand p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.footer-links h5,
+.footer-contact h5 {
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  letter-spacing: 0.03em;
+}
+
+.footer-links ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links ul li a {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+
+.footer-links ul li a:hover {
+  color: var(--green-light);
+}
+
+.footer-contact p {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+
+.footer-bottom {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-bottom p {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+}
+
+
+/* 17. RESPONSIVE */
+
+/* Tablets (max 960px) */
+@media (max-width: 960px) {
+  .steps-grid    { grid-template-columns: repeat(2, 1fr); }
+  .features-layout { grid-template-columns: 1fr; }
+  .features-image  { display: none; }   /* image chhupo, sirf text dikhao */
+  .actors-grid   { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner  { grid-template-columns: 1fr 1fr; }
+}
+
+/* Mobile (max 600px) */
+@media (max-width: 600px) {
+  h1             { font-size: 1.9rem; }
+  h2             { font-size: 1.5rem; }
+
+  .navbar-links  { display: none; }    /* links chhupo mobile par */
+  .hero-inner    { flex-direction: column; }
+  .hero-image    { display: none; }    /* hero image chhupo mobile par */
+  .steps-grid    { grid-template-columns: 1fr; }
+  .actors-grid   { grid-template-columns: 1fr 1fr; }
+  .footer-inner  { grid-template-columns: 1fr; }
+  .hero-heading  { font-size: 2rem; }
+  .section       { padding: 52px 0; }
+}
