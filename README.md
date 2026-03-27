@@ -92,7 +92,8 @@ This ensures:
 
 ## 👨‍💻 Developed By
 
-* Your Name
-* Team Members
+* Muhammad Amir
+* Faheem Akthar
+* Zaid Hassan
 
 ---
