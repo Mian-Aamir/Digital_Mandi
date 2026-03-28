@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Digital Mandi</title>
+
+  <!-- Font Awesome Icons - FREE CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../css/login.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+
+      <div class="navbar-logo">
+        <a href="../index.html">
+          <i class="fa-solid fa-seedling" style="font-size: 26px; color: #4CAF50;"></i>
+          <span class="logo-text">Digital Mandi</span>
+        </a>
+      </div>
+
+      <div class="navbar-actions">
+        <span class="navbar-hint">Don't have an account?</span>
+        <a href="register.html" class="btn btn-primary">Register Now</a>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       MAIN LOGIN AREA
+       Two columns: Left info panel + Right form
+  ============================================================ -->
+  <main class="login-page">
+
+    <!-- ── LEFT PANEL ── -->
+    <div class="login-left">
+
+      <div class="login-left-content">
+        <i class="fa-solid fa-seedling left-logo-icon"></i>
+        <h2>Welcome Back to <span>Digital Mandi</span></h2>
+        <p>Pakistan's trusted agriculture marketplace. Login to access your dashboard.</p>
+
+        <ul class="left-benefits">
+          <li>
+            <i class="fa-solid fa-ban"></i>
+            <span>No Middleman — deal directly with farmers and buyers</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Escrow payment keeps your money 100% safe</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Live government market prices always visible</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-certificate"></i>
+            <span>Certified seeds, fertilizers and sprays available</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+
+    <!-- RIGHT PANEL: LOGIN FORM -->
+    <div class="login-right">
+      <div class="login-form-box">
+
+        <!-- Header -->
+        <div class="form-header">
+          <h3>Login to Your Account</h3>
+          <p>Select your role and enter your credentials</p>
+        </div>
+
+        <!-- ── ROLE SELECTOR ── -->
+        <!-- Pure CSS trick: hidden radio input + label -->
+        <div class="role-selector">
+
+          <input type="radio" name="role" id="role-farmer" value="farmer" checked />
+          <label for="role-farmer" class="role-btn">
+            <i class="fa-solid fa-tractor"></i>
+            <span>Farmer</span>
+          </label>
+
+          <input type="radio" name="role" id="role-buyer" value="buyer" />
+          <label for="role-buyer" class="role-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Buyer</span>
+          </label>
+
+          <input type="radio" name="role" id="role-shopkeeper" value="shopkeeper" />
+          <label for="role-shopkeeper" class="role-btn">
+            <i class="fa-solid fa-store"></i>
+            <span>Shopkeeper</span>
+          </label>
+
+          <input type="radio" name="role" id="role-delivery" value="delivery" />
+          <label for="role-delivery" class="role-btn">
+            <i class="fa-solid fa-truck"></i>
+            <span>Delivery</span>
+          </label>
+
+        </div>
+
+
+        <!-- LOGIN FORM -->
+        <form action="" method="POST" class="login-form">
+
+          <!-- Phone Number -->
+          <div class="form-group">
+            <label for="phone" class="form-label">
+              <i class="fa-solid fa-mobile-screen"></i> Phone Number
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="form-input"
+              placeholder="03XX-XXXXXXX"
+              required
+            />
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email" class="form-label">
+              <i class="fa-solid fa-envelope"></i> Email Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="email@example.com"
+              required
+            />
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label for="password" class="form-label">
+              <i class="fa-solid fa-lock"></i> Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-input"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <!-- Remember me + Forgot password -->
+          <div class="form-row">
+            <label class="remember-label">
+              <input type="checkbox" name="remember" />
+              Remember me
+            </label>
+            <a href="#" class="forgot-link">Forgot Password?</a>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary btn-full">
+            <i class="fa-solid fa-right-to-bracket"></i> Login
+          </button>
+
+        </form>
+
+
+        <!-- Divider -->
+        <div class="divider">
+          <span>or</span>
+        </div>
+
+        <!-- Register link -->
+        <p class="register-link">
+          Don't have an account? <a href="register.html">Register here for free</a>
+        </p>
+
+        <!-- Back to home -->
+        <p class="back-home">
+          <a href="../index.html">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+          </a>
+        </p>
+
+      </div>
+    </div>
+
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <p>Copyright 2026 <strong>Digital Mandi</strong>. All Rights Reserved.</p>
+  </footer>
+
+
+</body>
+</html>
