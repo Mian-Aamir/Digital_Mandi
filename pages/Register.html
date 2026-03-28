@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - Digital Mandi</title>
+
+  <!-- Font Awesome Icons - FREE CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../css/register.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+
+      <div class="navbar-logo">
+        <a href="../index.html">
+          <i class="fa-solid fa-seedling" style="font-size: 26px; color: #4CAF50;"></i>
+          <span class="logo-text">Digital Mandi</span>
+        </a>
+      </div>
+
+      <div class="navbar-actions">
+        <span class="navbar-hint">Already have an account?</span>
+        <a href="login.html" class="btn btn-outline">Login</a>
+      </div>
+
+    </div>
+  </nav>
+
+  <main class="register-page">
+
+    <input type="radio" name="role" id="role-farmer"      value="farmer"      checked />
+    <input type="radio" name="role" id="role-buyer"       value="buyer"       />
+    <input type="radio" name="role" id="role-shopkeeper"  value="shopkeeper"  />
+    <input type="radio" name="role" id="role-delivery"    value="delivery"    />
+
+
+    <div class="register-box">
+
+      <!-- ── HEADER ── -->
+      <div class="reg-header">
+        <h3>Create Your Account</h3>
+        <p>Select your role to get started — it's completely free!</p>
+      </div>
+
+
+      <!-- ── ROLE SELECTOR ── -->
+      <!-- Labels for the hidden radio inputs above -->
+      <div class="role-selector">
+
+        <label for="role-farmer" class="role-card">
+          <i class="fa-solid fa-tractor"></i>
+          <span class="role-name">Farmer</span>
+          <span class="role-desc">List & sell your crops</span>
+        </label>
+
+        <label for="role-buyer" class="role-card">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="role-name">Buyer</span>
+          <span class="role-desc">Buy crops directly</span>
+        </label>
+
+        <label for="role-shopkeeper" class="role-card">
+          <i class="fa-solid fa-store"></i>
+          <span class="role-name">Shopkeeper</span>
+          <span class="role-desc">Sell certified products</span>
+        </label>
+
+        <label for="role-delivery" class="role-card">
+          <i class="fa-solid fa-truck"></i>
+          <span class="role-name">Delivery Man</span>
+          <span class="role-desc">Deliver & earn</span>
+        </label>
+
+      </div>
+
+
+      <!-- ── REGISTER FORM ── -->
+      <form action="" method="POST" class="reg-form">
+
+        <!--------------------------------------------
+             COMMON FIELDS — sab roles ke liye same
+        -------------------------------------------->
+        <div class="fields-section">
+          <h5 class="fields-title">
+            <i class="fa-solid fa-user"></i> Personal Information
+          </h5>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" name="first_name" class="form-input" placeholder="e.g. Ahmad" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input type="text" name="last_name" class="form-input" placeholder="e.g. Khan" required />
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">
+                <i class="fa-solid fa-mobile-screen"></i> Phone Number
+              </label>
+              <input type="tel" name="phone" class="form-input" placeholder="03XX-XXXXXXX" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">
+                <i class="fa-solid fa-envelope"></i> Email Address
+              </label>
+              <input type="email" name="email" class="form-input" placeholder="email@example.com" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              <i class="fa-solid fa-id-card"></i> CNIC Number
+            </label>
+            <input type="text" name="cnic" class="form-input" placeholder="XXXXX-XXXXXXX-X" required />
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">
+                <i class="fa-solid fa-map"></i> Province
+              </label>
+              <select name="province" class="form-select" required>
+                <option value="">Select Province</option>
+                <option>Punjab</option>
+                <option>Sindh</option>
+                <option>KPK</option>
+                <option>Balochistan</option>
+                <option>AJK</option>
+                <option>Gilgit Baltistan</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">
+                <i class="fa-solid fa-location-dot"></i> City / District
+              </label>
+              <input type="text" name="city" class="form-input" placeholder="e.g. Faisalabad" required />
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-----------------------------------------
+             FARMER ONLY FIELDS
+             CSS: #role-farmer:checked ~ .register-box .farmer-fields { display: block }
+        ----------------------------------------------->
+        <div class="fields-section farmer-fields">
+          <h5 class="fields-title">
+            <i class="fa-solid fa-tractor"></i> Farmer Details
+          </h5>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Farm Size (Acres)</label>
+              <input type="number" name="farm_size" class="form-input" placeholder="e.g. 5" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Main Crop Type</label>
+              <select name="crop_type" class="form-select">
+                <option value="">Select Crop</option>
+                <option>Wheat (Gandum)</option>
+                <option>Rice (Chawal)</option>
+                <option>Cotton (Kapas)</option>
+                <option>Sugarcane (Ganna)</option>
+                <option>Maize (Makki)</option>
+                <option>Vegetables</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Farm Address / Location</label>
+            <input type="text" name="farm_address" class="form-input" placeholder="Village / Tehsil / District" />
+          </div>
+
+        </div>
+
+
+        <!----------------------------------------
+             BUYER ONLY FIELDS
+             CSS: #role-buyer:checked ~ .register-box .buyer-fields { display: block }
+        ------------------------------------------------>
+        <div class="fields-section buyer-fields">
+          <h5 class="fields-title">
+            <i class="fa-solid fa-cart-shopping"></i> Buyer Details
+          </h5>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Buyer Type</label>
+              <select name="buyer_type" class="form-select">
+                <option value="">Select Type</option>
+                <option>Individual</option>
+                <option>Wholesaler</option>
+                <option>Retailer</option>
+                <option>Flour Mill</option>
+                <option>Rice Mill</option>
+                <option>Export Company</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Business Name (if any)</label>
+              <input type="text" name="business_name" class="form-input" placeholder="e.g. Khan Traders" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Crops Interested In</label>
+            <input type="text" name="crop_interest" class="form-input" placeholder="e.g. Wheat, Rice, Cotton" />
+          </div>
+
+        </div>
+
+
+        <!------------------------------------------
+             SHOPKEEPER ONLY FIELDS
+             CSS: #role-shopkeeper:checked ~ .register-box .shopkeeper-fields { display: block }
+        ------------------------------------------------>
+        <div class="fields-section shopkeeper-fields">
+          <h5 class="fields-title">
+            <i class="fa-solid fa-store"></i> Shopkeeper Details
+          </h5>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Shop Name</label>
+              <input type="text" name="shop_name" class="form-input" placeholder="e.g. Al-Madina Agri Store" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Shop Registration No.</label>
+              <input type="text" name="shop_reg" class="form-input" placeholder="Registration number" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Products You Sell</label>
+            <select name="product_type" class="form-select">
+              <option value="">Select Category</option>
+              <option>Seeds Only</option>
+              <option>Fertilizers Only</option>
+              <option>Pesticides / Sprays Only</option>
+              <option>Seeds + Fertilizers</option>
+              <option>All Products</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Shop Address</label>
+            <input type="text" name="shop_address" class="form-input" placeholder="Shop address / market name" />
+          </div>
+
+        </div>
+
+
+        <!--------------------------------------------
+             DELIVERY MAN ONLY FIELDS
+             CSS: #role-delivery:checked ~ .register-box .delivery-fields { display: block }
+        -------------------------------------------->
+        <div class="fields-section delivery-fields">
+          <h5 class="fields-title">
+            <i class="fa-solid fa-truck"></i> Delivery Man Details
+          </h5>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Vehicle Type</label>
+              <select name="vehicle_type" class="form-select">
+                <option value="">Select Vehicle</option>
+                <option>Motorcycle</option>
+                <option>Rickshaw</option>
+                <option>Mini Truck</option>
+                <option>Truck</option>
+                <option>Tractor Trolley</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Vehicle Reg. Number</label>
+              <input type="text" name="vehicle_reg" class="form-input" placeholder="e.g. LHR-1234" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Driving License Number</label>
+            <input type="text" name="license_no" class="form-input" placeholder="License number" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Delivery Area / District</label>
+            <input type="text" name="delivery_area" class="form-input" placeholder="e.g. Faisalabad, Jhang, Chiniot" />
+          </div>
+
+        </div>
+
+
+        <!--------------------------------------------
+             ACCOUNT SETUP — sab roles ke liye same
+        -------------------------------------------->
+        <div class="fields-section">
+          <h5 class="fields-title">
+            <i class="fa-solid fa-lock"></i> Account Setup
+          </h5>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <input type="password" name="password" class="form-input" placeholder="Min 8 characters" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confirm Password</label>
+              <input type="password" name="confirm_password" class="form-input" placeholder="Re-enter password" required />
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Terms & Conditions -->
+        <div class="terms-row">
+          <input type="checkbox" id="terms" name="terms" required />
+          <label for="terms">
+            I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a> of Digital Mandi
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-full">
+          <i class="fa-solid fa-user-plus"></i> Create My Account
+        </button>
+
+      </form>
+
+      <!-- Bottom link -->
+      <p class="login-link">
+        Already have an account? <a href="login.html">Login here</a>
+      </p>
+
+      <p class="back-home">
+        <a href="../index.html">
+          <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+      </p>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <p>Copyright 2026 <strong>Digital Mandi</strong>. All Rights Reserved.</p>
+  </footer>
+
+
+</body>
+</html>
