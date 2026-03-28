@@ -1,0 +1,498 @@
+/* ============================================================
+   Digital Mandi — login.css
+   Login page styling only.
+   Simple, clean, easy to read.
+   ============================================================ */
+
+
+/* ── 1. GOOGLE FONTS ── */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather:wght@700&display=swap');
+
+
+/* ── 2. CSS VARIABLES ── */
+:root {
+  --green-dark:    #1B5E20;
+  --green-main:    #2E7D32;
+  --green-light:   #4CAF50;
+  --green-pale:    #E8F5E9;
+  --green-border:  #C8E6C9;
+
+  --white:         #FFFFFF;
+  --bg:            #F5F9F5;
+  --text-dark:     #1A2E1A;
+  --text-mid:      #4A604A;
+  --text-light:    #7A927A;
+  --border:        #DCE8DC;
+
+  --font-heading:  'Merriweather', Georgia, serif;
+  --font-body:     'Poppins', sans-serif;
+
+  --radius:        10px;
+  --radius-lg:     18px;
+  --shadow:        0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ── 3. RESET & BASE ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--text-dark);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* ── 4. BUTTONS ── */
+.btn {
+  display: inline-block;
+  padding: 11px 24px;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.btn-primary {
+  background-color: var(--green-main);
+  color: var(--white);
+  border-color: var(--green-main);
+}
+
+.btn-primary:hover {
+  background-color: var(--green-dark);
+  border-color: var(--green-dark);
+  transform: translateY(-1px);
+}
+
+.btn-full {
+  width: 100%;
+  text-align: center;
+  padding: 13px;
+  font-size: 1rem;
+}
+
+
+/* ── 5. NAVBAR ── */
+.navbar {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-inner {
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
+.navbar-logo a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar-hint {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+
+/* ── 6. LOGIN PAGE LAYOUT ── */
+/* Two columns: left green panel + right white form */
+.login-page {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 68px - 56px);  /* minus navbar and footer */
+}
+
+
+/* ── 7. LEFT PANEL ── */
+.login-left {
+  background: linear-gradient(160deg, var(--green-dark) 0%, var(--green-main) 100%);
+  padding: 60px 48px;
+  display: flex;
+  align-items: center;
+}
+
+.login-left-content {
+  max-width: 400px;
+}
+
+.left-logo-icon {
+  font-size: 2.5rem;
+  color: #A5D6A7;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.login-left h2 {
+  color: var(--white);
+  font-size: 1.9rem;
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+
+.login-left h2 span {
+  color: #A5D6A7;
+}
+
+.login-left p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+
+/* Benefits list */
+.left-benefits {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.left-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.88rem;
+}
+
+.left-benefits li i {
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+
+/* ── 8. RIGHT PANEL ── */
+.login-right {
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px;
+}
+
+.login-form-box {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Form heading */
+.form-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.form-header h3 {
+  font-family: var(--font-heading);
+  color: var(--green-dark);
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.form-header p {
+  color: var(--text-light);
+  font-size: 0.88rem;
+}
+
+
+/* ── 9. ROLE SELECTOR ── */
+.role-selector {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+/* Radio input chhupo - dikhna nahi chahiye */
+.role-selector input[type="radio"] {
+  display: none;
+}
+
+/* Label ko button jaisa dikhao */
+.role-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 6px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  background-color: var(--white);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.role-btn i {
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+
+.role-btn span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  font-family: var(--font-body);
+}
+
+/* Jab radio checked ho tu uske baad wali label green ho jaye */
+/* :checked + .role-btn matlab: checked radio ke theek baad wala label */
+.role-selector input[type="radio"]:checked + .role-btn {
+  border-color: var(--green-main);
+  background-color: var(--green-pale);
+}
+
+.role-selector input[type="radio"]:checked + .role-btn i {
+  color: var(--green-main);
+}
+
+.role-selector input[type="radio"]:checked + .role-btn span {
+  color: var(--green-dark);
+}
+
+.role-btn:hover {
+  border-color: var(--green-light);
+  background-color: var(--green-pale);
+}
+
+
+/* ── 10. FORM ELEMENTS ── */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.form-label i {
+  color: var(--green-main);
+  margin-right: 4px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  background-color: var(--white);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--green-main);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.form-input::placeholder {
+  color: var(--text-light);
+}
+
+/* Remember me + Forgot password row */
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  font-size: 0.85rem;
+}
+
+.remember-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-mid);
+  cursor: pointer;
+}
+
+.remember-label input {
+  accent-color: var(--green-main);
+  cursor: pointer;
+}
+
+.forgot-link {
+  color: var(--green-main);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+
+/* ── 11. DIVIDER ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  color: var(--text-light);
+  font-size: 0.82rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--border);
+}
+
+
+/* ── 12. BOTTOM LINKS ── */
+.register-link {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+
+.register-link a {
+  color: var(--green-main);
+  font-weight: 600;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+.back-home {
+  text-align: center;
+  font-size: 0.83rem;
+}
+
+.back-home a {
+  color: var(--text-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+
+.back-home a:hover {
+  color: var(--green-main);
+}
+
+
+/* ── 13. FOOTER ── */
+.footer {
+  background-color: var(--green-dark);
+  padding: 16px 24px;
+  text-align: center;
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.8rem;
+}
+
+.footer strong {
+  color: var(--white);
+}
+
+
+/* ── 14. RESPONSIVE ── */
+@media (max-width: 768px) {
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+  .navbar-inner {
+    height: auto;
+    min-height: 60px;
+    padding: 10px 20px;
+    gap:12px;
+  }
+
+  /* 2. Shrink the logo text slightly for mobile */
+  .logo-text {
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
+
+  /* 3. Adjust the button padding and force text onto one line */
+  .navbar .btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    white-space: nowrap; /* This stops "Register Now" from breaking into two lines */
+  }
+
+  /* Left panel chhupo mobile par */
+  .login-left {
+    display: none;
+  }
+
+  .login-right {
+    padding: 32px 20px;
+  }
+
+  .navbar-hint {
+    display: none;
+  }
+
+  /* Role selector 3 columns on small screen */
+  .role-selector {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
