@@ -1,0 +1,461 @@
+/* ============================================================
+   Digital Mandi — register.css
+   Register page styling.
+
+   KEY TRICK — CSS Role Switching (no JavaScript):
+   ------------------------------------------------
+   Radio inputs page par hain (hidden).
+   Jab koi radio :checked hoti hai, CSS ~ (general sibling)
+   selector use karke sirf us role ke fields show karta hai.
+
+   Example:
+   #role-farmer:checked ~ .register-box .farmer-fields { display: block; }
+
+   Baaki sab by default display: none hote hain.
+   ============================================================ */
+
+
+/* ── 1. GOOGLE FONTS ── */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather:wght@700&display=swap');
+
+
+/* ── 2. CSS VARIABLES ── */
+:root {
+  --green-dark:    #1B5E20;
+  --green-main:    #2E7D32;
+  --green-light:   #4CAF50;
+  --green-pale:    #E8F5E9;
+  --green-border:  #C8E6C9;
+
+  --white:         #FFFFFF;
+  --bg:            #F5F9F5;
+  --text-dark:     #1A2E1A;
+  --text-mid:      #4A604A;
+  --text-light:    #7A927A;
+  --border:        #DCE8DC;
+
+  --font-heading:  'Merriweather', Georgia, serif;
+  --font-body:     'Poppins', sans-serif;
+
+  --radius:        10px;
+  --radius-lg:     18px;
+  --shadow:        0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ── 3. RESET & BASE ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--text-dark);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { text-decoration: none; color: inherit; }
+
+
+/* ── 4. BUTTONS ── */
+.btn {
+  display: inline-block;
+  padding: 11px 24px;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.btn-primary {
+  background-color: var(--green-main);
+  color: var(--white);
+  border-color: var(--green-main);
+}
+
+.btn-primary:hover {
+  background-color: var(--green-dark);
+  border-color: var(--green-dark);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--green-main);
+  border-color: var(--green-main);
+}
+
+.btn-outline:hover {
+  background-color: var(--green-pale);
+  transform: translateY(-1px);
+}
+
+.btn-full {
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  font-size: 1rem;
+}
+
+
+/* ── 5. NAVBAR ── */
+.navbar {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-inner {
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
+.navbar-logo a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar-hint {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+
+/* ── 6. PAGE LAYOUT ── */
+.register-page {
+  flex: 1;
+  padding: 40px 24px;
+}
+
+/* Hidden radio inputs — yeh sirf CSS trick ke liye hain */
+.register-page > input[type="radio"] {
+  display: none;
+}
+
+/* Center card */
+.register-box {
+  max-width: 680px;
+  margin: 0 auto;
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 36px 40px;
+}
+
+
+/* ── 7. HEADER ── */
+.reg-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.reg-header h3 {
+  font-family: var(--font-heading);
+  color: var(--green-dark);
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+}
+
+.reg-header p {
+  color: var(--text-light);
+  font-size: 0.88rem;
+}
+
+
+/* ── 8. ROLE SELECTOR ── */
+.role-selector {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+/* Role card label */
+.role-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  background-color: var(--white);
+  transition: border-color 0.2s, background 0.2s;
+  text-align: center;
+}
+
+.role-card i {
+  font-size: 1.5rem;
+  color: var(--text-light);
+  transition: color 0.2s;
+}
+
+.role-card .role-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-mid);
+  font-family: var(--font-body);
+}
+
+.role-card .role-desc {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  font-family: var(--font-body);
+}
+
+.role-card:hover {
+  border-color: var(--green-light);
+  background-color: var(--green-pale);
+}
+
+/* ── CSS TRICK: Active role card highlight ── */
+/* Jab farmer radio checked ho tu farmer label green ho */
+#role-farmer:checked     ~ .register-box label[for="role-farmer"],
+#role-buyer:checked      ~ .register-box label[for="role-buyer"],
+#role-shopkeeper:checked ~ .register-box label[for="role-shopkeeper"],
+#role-delivery:checked   ~ .register-box label[for="role-delivery"] {
+  border-color: var(--green-main);
+  background-color: var(--green-pale);
+}
+
+#role-farmer:checked     ~ .register-box label[for="role-farmer"] i,
+#role-buyer:checked      ~ .register-box label[for="role-buyer"] i,
+#role-shopkeeper:checked ~ .register-box label[for="role-shopkeeper"] i,
+#role-delivery:checked   ~ .register-box label[for="role-delivery"] i {
+  color: var(--green-main);
+}
+
+#role-farmer:checked     ~ .register-box label[for="role-farmer"] .role-name,
+#role-buyer:checked      ~ .register-box label[for="role-buyer"] .role-name,
+#role-shopkeeper:checked ~ .register-box label[for="role-shopkeeper"] .role-name,
+#role-delivery:checked   ~ .register-box label[for="role-delivery"] .role-name {
+  color: var(--green-dark);
+}
+
+
+/* ── 9. FORM STRUCTURE ── */
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Each section block */
+.fields-section {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 18px;
+}
+
+.fields-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-body);
+}
+
+.fields-title i {
+  color: var(--green-main);
+}
+
+/* 2 column row */
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+
+
+/* ── 10. FORM ELEMENTS ── */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+}
+
+.form-label i {
+  color: var(--green-main);
+  margin-right: 3px;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 10px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-dark);
+  background-color: var(--white);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--green-main);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.form-input::placeholder {
+  color: var(--text-light);
+}
+
+
+/* ── 11. ROLE-SPECIFIC FIELDS (CSS TRICK) ── */
+
+/* By default sab role fields hidden hain */
+.farmer-fields,
+.buyer-fields,
+.shopkeeper-fields,
+.delivery-fields {
+  display: none;
+}
+
+/* Sirf selected role ke fields show hon */
+#role-farmer:checked     ~ .register-box .farmer-fields     { display: block; }
+#role-buyer:checked      ~ .register-box .buyer-fields      { display: block; }
+#role-shopkeeper:checked ~ .register-box .shopkeeper-fields { display: block; }
+#role-delivery:checked   ~ .register-box .delivery-fields   { display: block; }
+
+
+/* ── 12. TERMS ROW ── */
+.terms-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color: var(--text-mid);
+}
+
+.terms-row input {
+  margin-top: 3px;
+  accent-color: var(--green-main);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.terms-row a {
+  color: var(--green-main);
+  font-weight: 600;
+}
+
+.terms-row a:hover {
+  text-decoration: underline;
+}
+
+
+/* ── 13. BOTTOM LINKS ── */
+.login-link {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 0.88rem;
+  color: var(--text-light);
+}
+
+.login-link a {
+  color: var(--green-main);
+  font-weight: 600;
+}
+
+.login-link a:hover { text-decoration: underline; }
+
+.back-home {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.83rem;
+}
+
+.back-home a {
+  color: var(--text-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+
+.back-home a:hover { color: var(--green-main); }
+
+
+/* ── 14. FOOTER ── */
+.footer {
+  background-color: var(--green-dark);
+  padding: 16px 24px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.8rem;
+}
+
+.footer strong { color: var(--white); }
+
+
+/* ── 15. RESPONSIVE ── */
+@media (max-width: 700px) {
+  .register-box  { padding: 24px 18px; }
+  .role-selector { grid-template-columns: repeat(2, 1fr); }
+  .form-row-2    { grid-template-columns: 1fr; }
+  .navbar-hint   { display: none; }
+  .navbar-inner {
+    height: auto;
+    min-height: 60px;
+    padding: 10px 20px;
+    gap:12px;
+  }
+
+  /* 2. Shrink the logo text slightly for mobile */
+  .logo-text {
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
+}
