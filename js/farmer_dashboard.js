@@ -46,6 +46,10 @@ function showSection(sectionId, el) {
     if (sectionId === 'section-overview') {
         loadOverview();
     }
+
+    if (sectionId === 'section-deliveries') {
+    loadDeliveryRoutes();
+    }
 }
 
 // ── Show Add Form ──
@@ -307,5 +311,67 @@ async function loadOverview() {
 
     } catch (err) {
         console.log('Overview load error:', err);
+    }
+}
+
+// READ - Load all available delivery routes
+async function loadDeliveryRoutes() {
+    var container       = document.getElementById('delivery-routes-container');
+    container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i><p>Loading delivery routes...</p></div>';
+
+    try {
+        var response = await fetch('../api/routes/route_read_all.php');
+        var text     = await response.text();
+
+        if (text.trim() === 'unauthorized') {
+            container.innerHTML = '<div class="empty-state"><p>Session expired. Please login again.</p></div>';
+            return;
+        }
+
+        var routes = JSON.parse(text);
+
+        if (routes.length === 0) {
+            container.innerHTML =
+                '<div class="empty-state">' +
+                    '<i class="fa-solid fa-truck"></i>' +
+                    '<p>No delivery routes available right now.</p>' +
+                '</div>';
+            return;
+        }
+
+        var html = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;padding:4px;">';
+
+        routes.forEach(function (route) {
+            html +=
+                '<div class="card" style="margin-bottom:0;">' +
+                    '<div class="card-body">' +
+                        '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">' +
+                            '<h4 style="font-size:0.95rem;color:var(--green-dark);">' +
+                                '<i class="fa-solid fa-truck" style="margin-right:6px;"></i>' +
+                                route.vehicle_type.replace(/_/g, ' ') +
+                            '</h4>' +
+                            '<span class="badge badge-green">' + route.status + '</span>' +
+                        '</div>' +
+                        '<div style="display:flex;flex-direction:column;gap:7px;margin-bottom:14px;">' +
+                            '<p style="font-size:0.83rem;"><i class="fa-solid fa-user" style="color:var(--green-main);width:16px;"></i> <strong>Driver:</strong> ' + route.driver_name + '</p>' +
+                            '<p style="font-size:0.83rem;"><i class="fa-solid fa-location-dot" style="color:var(--green-main);width:16px;"></i> <strong>From:</strong> ' + route.pickup_area + '</p>' +
+                            '<p style="font-size:0.83rem;"><i class="fa-solid fa-location-dot" style="color:var(--green-main);width:16px;"></i> <strong>To:</strong> ' + route.drop_area + '</p>' +
+                            '<p style="font-size:0.83rem;"><i class="fa-solid fa-box" style="color:var(--green-main);width:16px;"></i> <strong>Cargo:</strong> ' + route.cargo_type + '</p>' +
+                            '<p style="font-size:0.83rem;"><i class="fa-solid fa-weight-hanging" style="color:var(--green-main);width:16px;"></i> <strong>Capacity:</strong> ' + route.capacity_kg + ' kg</p>' +
+                            '<p style="font-size:0.83rem;"><i class="fa-solid fa-tag" style="color:var(--green-main);width:16px;"></i> <strong>Price:</strong> Rs. ' + Number(route.price_per_trip).toLocaleString() + ' / trip</p>' +
+                            '<p style="font-size:0.83rem;"><i class="fa-solid fa-phone" style="color:var(--green-main);width:16px;"></i> <strong>Contact:</strong> ' + route.contact + '</p>' +
+                        '</div>' +
+                        '<a href="tel:' + route.contact + '" class="btn btn-primary" style="width:100%;">' +
+                            '<i class="fa-solid fa-phone"></i> Contact Driver' +
+                        '</a>' +
+                    '</div>' +
+                '</div>';
+        });
+
+        html += '</div>';
+        container.innerHTML = html;
+
+    } catch (err) {
+        container.innerHTML = '<div class="empty-state"><p>Error loading routes. Please refresh.</p></div>';
     }
 }

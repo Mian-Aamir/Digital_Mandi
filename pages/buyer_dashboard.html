@@ -42,6 +42,12 @@
         <li class="sidebar-item" onclick="showSection('section-orders', this)">
           <i class="fa-solid fa-box"></i> My Orders
         </li>
+        <li
+           class="sidebar-item"
+           onclick="showSection('section-deliveries', this)"
+         >
+           <i class="fa-solid fa-truck"></i> Deliveries
+         </li>
         <div class="sidebar-divider"></div>
         <li class="sidebar-item" onclick="showSection('section-ratings', this)">
           <i class="fa-solid fa-star"></i> Rate Farmers
@@ -216,6 +222,21 @@
         </div>
       </div>
 
+      <!-- SECTION: DELIVERIES -->
+<div id="section-deliveries" class="section-content" style="display:none;">
+  <div class="page-header">
+    <div>
+      <h2>Available Delivery Services</h2>
+      <p>Find delivery men to transport your goods safely</p>
+    </div>
+  </div>
+  <div id="delivery-routes-container">
+    <div class="empty-state">
+      <i class="fa-solid fa-spinner fa-spin"></i>
+      <p>Loading delivery routes...</p>
+    </div>
+  </div>
+</div>
 
       <!-- SECTION 5: RATE FARMERS -->
       <div id="section-ratings" class="section-content" style="display:none;">
