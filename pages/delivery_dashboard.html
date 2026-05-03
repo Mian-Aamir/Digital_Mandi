@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delivery Dashboard - Digital Mandi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <script src="../js/delivery_dashboard.js" defer></script>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-logo">
+                <i class="fa-solid fa-seedling"></i>
+                Digital Mandi
+            </div>
+            <div class="navbar-user">
+                <span><i class="fa-solid fa-truck"></i> Delivery Dashboard</span>
+                <a href="../api/auth/logout.php" class="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="sidebar-item active" onclick="showSection('section-overview', this)">
+                    <i class="fa-solid fa-gauge"></i> Overview
+                </li>
+                <li class="sidebar-item" onclick="showSection('section-routes', this)">
+                    <i class="fa-solid fa-route"></i> My Routes
+                </li>
+                <li class="sidebar-item" onclick="showSection('section-requests', this)">
+                    <i class="fa-solid fa-bell"></i> Delivery Requests
+                </li>
+                <li class="sidebar-item" onclick="showSection('section-history', this)">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Trip History
+                </li>
+                <div class="sidebar-divider"></div>
+                <li class="sidebar-item" onclick="showSection('section-vehicles', this)">
+                    <i class="fa-solid fa-truck-moving"></i> Vehicle Guide
+                </li>
+                <li class="sidebar-item" onclick="showSection('section-rates', this)">
+                    <i class="fa-solid fa-chart-line"></i> Standard Rates
+                </li>
+                <div class="sidebar-divider"></div>
+                <li class="sidebar-item" onclick="showSection('section-profile', this)">
+                    <i class="fa-solid fa-user"></i> My Profile
+                </li>
+            </ul>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+
+            <!-- SECTION 1: OVERVIEW -->
+            <div id="section-overview" class="section-content">
+                <div class="page-header">
+                    <div>
+                        <h2>Welcome Back, Driver!</h2>
+                        <p>Manage your delivery routes and trips on Digital Mandi</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="showSection('section-routes', null); showAddForm();">
+                        <i class="fa-solid fa-plus"></i> Add New Route
+                    </button>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fa-solid fa-route"></i></div>
+                        <div>
+                            <div class="stat-num" id="stat-total">0</div>
+                            <div class="stat-label">Routes Listed</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fa-solid fa-circle-check"></i></div>
+                        <div>
+                            <div class="stat-num" id="stat-available">0</div>
+                            <div class="stat-label">Available</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red"><i class="fa-solid fa-truck-fast"></i></div>
+                        <div>
+                            <div class="stat-num" id="stat-busy">0</div>
+                            <div class="stat-label">Active Trips</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gold"><i class="fa-solid fa-Pakistani-rupee-sign"></i></div>
+                        <div>
+                            <div class="stat-num" id="stat-earnings">Rs. 0</div>
+                            <div class="stat-label">Listed Value</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick cards -->
+                <div class="form-row-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4><i class="fa-solid fa-route"></i> Recent Routes</h4>
+                            <button class="btn btn-sm btn-outline" onclick="showSection('section-routes', null)">View
+                                All</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-route"></i>
+                                <p>No routes listed yet</p>
+                                <button class="btn btn-primary btn-sm"
+                                    onclick="showSection('section-routes', null); showAddForm();">Add First
+                                    Route</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h4><i class="fa-solid fa-chart-line"></i> Standard Delivery Rates</h4>
+                        </div>
+                        <div class="card-body" style="padding:0;">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Vehicle</th>
+                                        <th>Typical Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i class="fa-solid fa-motorcycle"></i> Motorcycle</td>
+                                        <td>Rs. 500–1,000 / trip</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa-solid fa-van-shuttle"></i> Rickshaw</td>
+                                        <td>Rs. 800–1,500 / trip</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa-solid fa-truck-pickup"></i> Pickup Truck</td>
+                                        <td>Rs. 2,500–5,000 / trip</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa-solid fa-tractor"></i> Tractor Trolley</td>
+                                        <td>Rs. 3,000–6,000 / trip</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa-solid fa-truck-moving"></i> Large Truck</td>
+                                        <td>Rs. 8,000–20,000 / trip</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SECTION 2: MY ROUTES (CRUD) -->
+            <div id="section-routes" class="section-content" style="display:none;">
+                <div class="page-header">
+                    <div>
+                        <h2>My Delivery Routes</h2>
+                        <p>Add, edit or remove the routes you can deliver on</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="showAddForm()">
+                        <i class="fa-solid fa-plus"></i> Add New Route
+                    </button>
+                </div>
+
+                <!-- Add / Edit Form -->
+                <div class="card" id="route-form-card" style="display:none;">
+                    <div class="card-header">
+                        <h4><i class="fa-solid fa-route"></i> <span id="form-title">Add New Route</span></h4>
+                        <button class="btn btn-sm btn-outline" onclick="hideForm()">
+                            <i class="fa-solid fa-xmark"></i> Cancel
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <form id="routeForm" onsubmit="handleRouteSubmit(event)">
+
+                            <input type="hidden" id="route_id" name="route_id" value="" />
+
+                            <div class="form-row-2">
+                                <div class="form-group">
+                                    <label class="form-label">Pickup Area (From)</label>
+                                    <input type="text" name="pickup_area" id="pickup_area" class="form-input"
+                                        placeholder="e.g. Faisalabad Mandi, Punjab" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Drop Area (To)</label>
+                                    <input type="text" name="drop_area" id="drop_area" class="form-input"
+                                        placeholder="e.g. Lahore Sabzi Mandi" required />
+                                </div>
+                            </div>
+
+                            <div class="form-row-3">
+                                <div class="form-group">
+                                    <label class="form-label">Vehicle Type</label>
+                                    <select name="vehicle_type" id="vehicle_type" class="form-select" required>
+                                        <option value="">Select Vehicle</option>
+                                        <option value="motorcycle">Motorcycle</option>
+                                        <option value="rickshaw">Rickshaw</option>
+                                        <option value="pickup_truck">Pickup Truck</option>
+                                        <option value="tractor_trolley">Tractor Trolley</option>
+                                        <option value="mini_truck">Mini Truck</option>
+                                        <option value="large_truck">Large Truck</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Cargo Type</label>
+                                    <select name="cargo_type" id="cargo_type" class="form-select" required>
+                                        <option value="crops">Crops</option>
+                                        <option value="fertilizer">Fertilizer</option>
+                                        <option value="seeds">Seeds</option>
+                                        <option value="mixed">Mixed / Any</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Capacity (kg)</label>
+                                    <input type="number" name="capacity_kg" id="capacity_kg" class="form-input"
+                                        placeholder="e.g. 2000" required />
+                                </div>
+                            </div>
+
+                            <div class="form-row-3">
+                                <div class="form-group">
+                                    <label class="form-label">Price per Trip (Rs.)</label>
+                                    <input type="number" name="price_per_trip" id="price_per_trip" class="form-input"
+                                        placeholder="e.g. 5000" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Contact Number</label>
+                                    <input type="text" name="contact" id="contact" class="form-input"
+                                        placeholder="e.g. 03001234567" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Status</label>
+                                    <select name="status" id="status" class="form-select">
+                                        <option value="available">Available</option>
+                                        <option value="busy">Busy (On Trip)</option>
+                                        <option value="on_leave">On Leave</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Description (optional)</label>
+                                <input type="text" name="description" id="description" class="form-input"
+                                    placeholder="Any extra details — scheduling, special cargo handling..." />
+                            </div>
+
+                            <div id="form-msg" class="msg-box"></div>
+
+                            <button type="submit" id="form-btn" class="btn btn-primary">
+                                <i class="fa-solid fa-floppy-disk"></i> Save Route
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Routes Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fa-solid fa-list"></i> All My Routes</h4>
+                    </div>
+                    <div class="card-body" style="padding:0;">
+                        <div id="routes-container">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+                                <p>Loading your routes...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SECTION 3: DELIVERY REQUESTS -->
+            <div id="section-requests" class="section-content" style="display:none;">
+                <div class="page-header">
+                    <div>
+                        <h2>Delivery Requests</h2>
+                        <p>Farmers and buyers looking for delivery in your area</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="empty-state">
+                            <i class="fa-solid fa-bell"></i>
+                            <p>No delivery requests yet. Add your routes so farmers can find you!</p>
+                            <button class="btn btn-primary btn-sm"
+                                onclick="showSection('section-routes', null); showAddForm();">Add a Route</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SECTION 4: TRIP HISTORY -->
+            <div id="section-history" class="section-content" style="display:none;">
+                <div class="page-header">
+                    <div>
+                        <h2>Trip History</h2>
+                        <p>Track your completed delivery trips and earnings</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="empty-state">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <p>No trips completed yet. Completed trips will appear here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SECTION 5: VEHICLE GUIDE -->
+            <div id="section-vehicles" class="section-content" style="display:none;">
+                <div class="page-header">
+                    <div>
+                        <h2>Vehicle Suitability Guide</h2>
+                        <p>Which vehicle is best for which agricultural cargo</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body" style="padding:0;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Vehicle</th>
+                                    <th>Urdu Name</th>
+                                    <th>Capacity</th>
+                                    <th>Best For</th>
+                                    <th>Typical Route</th>
+                                    <th>Rate Range</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="fa-solid fa-motorcycle"></i> <strong>Motorcycle</strong></td>
+                                    <td>موٹر سائیکل</td>
+                                    <td>Up to 80 kg</td>
+                                    <td><span class="badge badge-blue">Seeds / Documents</span></td>
+                                    <td>Local village routes</td>
+                                    <td>Rs. 500–1,000 / trip</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa-solid fa-van-shuttle"></i> <strong>Rickshaw</strong></td>
+                                    <td>رکشہ / چنگچی</td>
+                                    <td>Up to 300 kg</td>
+                                    <td><span class="badge badge-green">Vegetables / Small loads</span></td>
+                                    <td>Mandi to nearby areas</td>
+                                    <td>Rs. 800–1,500 / trip</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa-solid fa-truck-pickup"></i> <strong>Pickup Truck</strong></td>
+                                    <td>پک اپ گاڑی</td>
+                                    <td>Up to 1,500 kg</td>
+                                    <td><span class="badge badge-gold">Fertilizer / Crops</span></td>
+                                    <td>District to district</td>
+                                    <td>Rs. 2,500–5,000 / trip</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa-solid fa-tractor"></i> <strong>Tractor Trolley</strong></td>
+                                    <td>ٹریکٹر ٹرالی</td>
+                                    <td>Up to 5,000 kg</td>
+                                    <td><span class="badge badge-green">Wheat / Rice / Bulk crops</span></td>
+                                    <td>Farm to mandi</td>
+                                    <td>Rs. 3,000–6,000 / trip</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa-solid fa-truck"></i> <strong>Mini Truck</strong></td>
+                                    <td>چھوٹا ٹرک</td>
+                                    <td>Up to 7,000 kg</td>
+                                    <td><span class="badge badge-gold">Fertilizer / Mixed cargo</span></td>
+                                    <td>Province-wide delivery</td>
+                                    <td>Rs. 5,000–12,000 / trip</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa-solid fa-truck-moving"></i> <strong>Large Truck</strong></td>
+                                    <td>بڑا ٹرک</td>
+                                    <td>10,000+ kg</td>
+                                    <td><span class="badge badge-green">Cotton / Sugarcane / Bulk</span></td>
+                                    <td>Inter-city / national</td>
+                                    <td>Rs. 8,000–20,000 / trip</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SECTION 6: STANDARD RATES -->
+            <div id="section-rates" class="section-content" style="display:none;">
+                <div class="page-header">
+                    <div>
+                        <h2>Standard Delivery Rates — Pakistan</h2>
+                        <p>Market reference rates for agricultural transport — April 2026</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body" style="padding:0;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Route Type</th>
+                                    <th>Distance</th>
+                                    <th>Vehicle</th>
+                                    <th>Cargo</th>
+                                    <th>Market Rate (Rs.)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Village → Local Mandi</td>
+                                    <td>5–15 km</td>
+                                    <td><i class="fa-solid fa-tractor"></i> Tractor Trolley</td>
+                                    <td><span class="badge badge-green">Crops</span></td>
+                                    <td><strong>3,000–4,000</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Mandi → City Wholesale</td>
+                                    <td>20–50 km</td>
+                                    <td><i class="fa-solid fa-truck-pickup"></i> Pickup Truck</td>
+                                    <td><span class="badge badge-green">Vegetables</span></td>
+                                    <td><strong>2,500–4,500</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>District → Lahore</td>
+                                    <td>100–200 km</td>
+                                    <td><i class="fa-solid fa-truck"></i> Mini Truck</td>
+                                    <td><span class="badge badge-gold">Fertilizer</span></td>
+                                    <td><strong>8,000–12,000</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Farm → Flour Mill (Chakki)</td>
+                                    <td>10–30 km</td>
+                                    <td><i class="fa-solid fa-tractor"></i> Tractor Trolley</td>
+                                    <td><span class="badge badge-green">Wheat</span></td>
+                                    <td><strong>3,500–5,000</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Sindh ↔ Punjab</td>
+                                    <td>300–600 km</td>
+                                    <td><i class="fa-solid fa-truck-moving"></i> Large Truck</td>
+                                    <td><span class="badge badge-green">Cotton / Rice</span></td>
+                                    <td><strong>15,000–25,000</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Shop → Nearby Village</td>
+                                    <td>5–20 km</td>
+                                    <td><i class="fa-solid fa-truck-pickup"></i> Pickup / Rickshaw</td>
+                                    <td><span class="badge badge-blue">Seeds</span></td>
+                                    <td><strong>1,000–2,500</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SECTION 7: PROFILE -->
+            <div id="section-profile" class="section-content" style="display:none;">
+                <div class="page-header">
+                    <div>
+                        <h2>My Profile</h2>
+                        <p>Your driver account information</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="empty-state">
+                            <i class="fa-solid fa-truck"></i>
+                            <p>Profile details coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>Copyright 2026 <strong>Digital Mandi</strong>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../js/delivery_dashboard.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farmer Dashboard - Digital Mandi</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <script defer src="../js/farmer_dashboard.js"></script>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <div class="navbar-logo">
+          <i class="fa-solid fa-seedling"></i>
+          Digital Mandi
+        </div>
+        <div class="navbar-user">
+          <span><i class="fa-solid fa-circle-user"></i> Farmer Dashboard</span>
+          <a href="../api/auth/logout.php" class="logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="dashboard-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <ul class="sidebar-menu">
+          <li
+            class="sidebar-item active"
+            onclick="showSection('section-overview', this)"
+          >
+            <i class="fa-solid fa-gauge"></i> Overview
+          </li>
+          <li class="sidebar-item" onclick="showSection('section-crops', this)">
+            <i class="fa-solid fa-wheat-awn"></i> My Crops
+          </li>
+          <li
+            class="sidebar-item"
+            onclick="showSection('section-offers', this)"
+          >
+            <i class="fa-solid fa-handshake"></i> Offers Received
+          </li>
+          <li
+            class="sidebar-item"
+            onclick="showSection('section-deliveries', this)"
+          >
+            <i class="fa-solid fa-truck"></i> Deliveries
+          </li>
+          <div class="sidebar-divider"></div>
+          <li
+            class="sidebar-item"
+            onclick="showSection('section-prices', this)"
+          >
+            <i class="fa-solid fa-chart-line"></i> Market Prices
+          </li>
+          <li
+            class="sidebar-item"
+            onclick="showSection('section-ratings', this)"
+          >
+            <i class="fa-solid fa-star"></i> My Ratings
+          </li>
+          <div class="sidebar-divider"></div>
+          <li
+            class="sidebar-item"
+            onclick="showSection('section-profile', this)"
+          >
+            <i class="fa-solid fa-user"></i> My Profile
+          </li>
+        </ul>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <!-- SECTION 1: OVERVIEW -->
+        <div id="section-overview" class="section-content">
+          <div class="page-header">
+            <div>
+              <h2>Welcome Back, Farmer!</h2>
+              <p>Here is a summary of your activity on Digital Mandi</p>
+            </div>
+            <button
+              class="btn btn-primary"
+              onclick="
+                showSection('section-crops', null);
+                showAddForm();
+              "
+            >
+              <i class="fa-solid fa-plus"></i> Add New Crop
+            </button>
+          </div>
+
+          <!-- Stats -->
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-icon green">
+                <i class="fa-solid fa-wheat-awn"></i>
+              </div>
+              <div>
+                <div class="stat-num">0</div>
+                <div class="stat-label">Crops Listed</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon gold">
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                <div class="stat-num">0</div>
+                <div class="stat-label">Available</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon blue">
+                <i class="fa-solid fa-handshake"></i>
+              </div>
+              <div>
+                <div class="stat-num">0</div>
+                <div class="stat-label">Offers Received</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon red"><i class="fa-solid fa-truck"></i></div>
+              <div>
+                <div class="stat-num">0</div>
+                <div class="stat-label">Deliveries Done</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick cards -->
+          <div class="form-row-2">
+            <div class="card">
+              <div class="card-header">
+                <h4><i class="fa-solid fa-wheat-awn"></i> Recent Crops</h4>
+                <button
+                  class="btn btn-sm btn-outline"
+                  onclick="showSection('section-crops', null)"
+                >
+                  View All
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="empty-state">
+                  <i class="fa-solid fa-wheat-awn"></i>
+                  <p>No crops listed yet</p>
+                  <button
+                    class="btn btn-primary btn-sm"
+                    onclick="
+                      showSection('section-crops', null);
+                      showAddForm();
+                    "
+                  >
+                    Add First Crop
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h4>
+                  <i class="fa-solid fa-chart-line"></i> Today's Market Prices
+                </h4>
+              </div>
+              <div class="card-body" style="padding: 0">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Crop</th>
+                      <th>Govt. Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Wheat (Gandum)</td>
+                      <td>Rs. 3,900 / 40kg</td>
+                    </tr>
+                    <tr>
+                      <td>Rice - Basmati</td>
+                      <td>Rs. 7,200 / 40kg</td>
+                    </tr>
+                    <tr>
+                      <td>Cotton (Kapas)</td>
+                      <td>Rs. 8,500 / 40kg</td>
+                    </tr>
+                    <tr>
+                      <td>Sugarcane</td>
+                      <td>Rs. 425 / 40kg</td>
+                    </tr>
+                    <tr>
+                      <td>Maize (Makki)</td>
+                      <td>Rs. 2,100 / 40kg</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: MY CROPS -->
+        <div id="section-crops" class="section-content" style="display: none">
+          <div class="page-header">
+            <div>
+              <h2>My Crop Listings</h2>
+              <p>Add, edit or remove your crop listings</p>
+            </div>
+            <button class="btn btn-primary" onclick="showAddForm()">
+              <i class="fa-solid fa-plus"></i> Add New Crop
+            </button>
+          </div>
+
+          <!-- Add / Edit Form -->
+          <div class="card" id="crop-form-card" style="display: none">
+            <div class="card-header">
+              <h4>
+                <i class="fa-solid fa-wheat-awn"></i>
+                <span id="form-title">Add New Crop</span>
+              </h4>
+              <button class="btn btn-sm btn-outline" onclick="hideForm()">
+                <i class="fa-solid fa-xmark"></i> Cancel
+              </button>
+            </div>
+            <div class="card-body">
+              <form id="cropForm" onsubmit="handleCropSubmit(event)">
+                <input type="hidden" id="crop_id" name="crop_id" value="" />
+
+                <div class="form-row-3">
+                  <div class="form-group">
+                    <label class="form-label">Crop Name</label>
+                    <select
+                      name="crop_name"
+                      id="crop_name"
+                      class="form-select"
+                      required
+                    >
+                      <option value="">Select Crop</option>
+                      <option>Wheat (Gandum)</option>
+                      <option>Rice (Chawal)</option>
+                      <option>Cotton (Kapas)</option>
+                      <option>Sugarcane (Ganna)</option>
+                      <option>Maize (Makki)</option>
+                      <option>Vegetables</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Quantity (kg)</label>
+                    <input
+                      type="number"
+                      name="quantity"
+                      id="quantity"
+                      class="form-input"
+                      placeholder="e.g. 500"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Price per 40kg (Rs.)</label>
+                    <input
+                      type="number"
+                      name="price"
+                      id="price"
+                      class="form-input"
+                      placeholder="e.g. 3900"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input
+                      type="text"
+                      name="location"
+                      id="location"
+                      class="form-input"
+                      placeholder="Village / Tehsil / District"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select name="status" id="status" class="form-select">
+                      <option value="available">Available</option>
+                      <option value="sold">Sold</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Description (optional)</label>
+                  <input
+                    type="text"
+                    name="description"
+                    id="description"
+                    class="form-input"
+                    placeholder="Any extra details about your crop..."
+                  />
+                </div>
+
+                <div id="form-msg" class="msg-box"></div>
+
+                <button type="submit" id="form-btn" class="btn btn-primary">
+                  <i class="fa-solid fa-floppy-disk"></i> Save Crop
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Crops Table -->
+          <div class="card">
+            <div class="card-header">
+              <h4><i class="fa-solid fa-list"></i> All My Crops</h4>
+            </div>
+            <div class="card-body" style="padding: 0">
+              <div id="crops-container">
+                <div class="empty-state">
+                  <i class="fa-solid fa-spinner fa-spin"></i>
+                  <p>Loading your crops...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: OFFERS -->
+        <div id="section-offers" class="section-content" style="display: none">
+          <div class="page-header">
+            <div>
+              <h2>Offers Received</h2>
+              <p>Buyers interested in your crops</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="empty-state">
+                <i class="fa-solid fa-handshake"></i>
+                <p>
+                  No offers received yet. List your crops to start receiving
+                  offers!
+                </p>
+                <button
+                  class="btn btn-primary btn-sm"
+                  onclick="showSection('section-crops', null)"
+                >
+                  Go to My Crops
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: DELIVERIES -->
+        <div
+          id="section-deliveries"
+          class="section-content"
+          style="display: none"
+        >
+          <div class="page-header">
+            <div>
+              <h2>My Deliveries</h2>
+              <p>Track deliveries of your sold crops</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="empty-state">
+                <i class="fa-solid fa-truck"></i>
+                <p>
+                  No deliveries yet. Deliveries appear here after a deal is
+                  confirmed.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 5: MARKET PRICES -->
+        <div id="section-prices" class="section-content" style="display: none">
+          <div class="page-header">
+            <div>
+              <h2>Government Market Prices</h2>
+              <p>Official rates — Last updated: March 2026</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body" style="padding: 0">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Crop / Product</th>
+                    <th>Unit</th>
+                    <th>Govt. Price (Rs.)</th>
+                    <th>Category</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Wheat (Gandum)</td>
+                    <td>40 kg</td>
+                    <td><strong>3,900</strong></td>
+                    <td><span class="badge badge-green">Crop</span></td>
+                  </tr>
+                  <tr>
+                    <td>Rice - Basmati</td>
+                    <td>40 kg</td>
+                    <td><strong>7,200</strong></td>
+                    <td><span class="badge badge-green">Crop</span></td>
+                  </tr>
+                  <tr>
+                    <td>Sugarcane (Ganna)</td>
+                    <td>40 kg</td>
+                    <td><strong>425</strong></td>
+                    <td><span class="badge badge-green">Crop</span></td>
+                  </tr>
+                  <tr>
+                    <td>Cotton (Kapas)</td>
+                    <td>40 kg</td>
+                    <td><strong>8,500</strong></td>
+                    <td><span class="badge badge-green">Crop</span></td>
+                  </tr>
+                  <tr>
+                    <td>Maize (Makki)</td>
+                    <td>40 kg</td>
+                    <td><strong>2,100</strong></td>
+                    <td><span class="badge badge-green">Crop</span></td>
+                  </tr>
+                  <tr>
+                    <td>DAP Fertilizer</td>
+                    <td>50 kg bag</td>
+                    <td><strong>9,400</strong></td>
+                    <td><span class="badge badge-gold">Fertilizer</span></td>
+                  </tr>
+                  <tr>
+                    <td>Urea Fertilizer</td>
+                    <td>50 kg bag</td>
+                    <td><strong>3,500</strong></td>
+                    <td><span class="badge badge-gold">Fertilizer</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 6: RATINGS -->
+        <div id="section-ratings" class="section-content" style="display: none">
+          <div class="page-header">
+            <div>
+              <h2>My Ratings & Reviews</h2>
+              <p>What buyers say about you</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="empty-state">
+                <i class="fa-solid fa-star"></i>
+                <p>
+                  No ratings yet. Complete deals to receive ratings from buyers.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 7: PROFILE -->
+        <div id="section-profile" class="section-content" style="display: none">
+          <div class="page-header">
+            <div>
+              <h2>My Profile</h2>
+              <p>Your account information</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="empty-state">
+                <i class="fa-solid fa-user"></i>
+                <p>Profile details coming soon.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>Copyright 2026 <strong>Digital Mandi</strong>. All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>

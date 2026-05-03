@@ -40,7 +40,7 @@
   ============================================================ -->
   <main class="login-page">
 
-    <!-- ── LEFT PANEL ── -->
+    <!-- LEFT PANEL -->
     <div class="login-left">
 
       <div class="login-left-content">
@@ -81,8 +81,9 @@
           <p>Select your role and enter your credentials</p>
         </div>
 
-        <!-- ── ROLE SELECTOR ── -->
+        <!-- ROLE SELECTOR -->
         <!-- Pure CSS trick: hidden radio input + label -->
+        <!-- When radio is checked, its label turns green automatically -->
         <div class="role-selector">
 
           <input type="radio" name="role" id="role-farmer" value="farmer" checked />
@@ -113,7 +114,8 @@
 
 
         <!-- LOGIN FORM -->
-        <form action="" method="POST" class="login-form">
+        <!-- onsubmit calls handleLogin() from login.js - no page reload -->
+        <form id="loginForm" onsubmit="handleLogin(event)" class="login-form">
 
           <!-- Phone Number -->
           <div class="form-group">
@@ -170,9 +172,19 @@
           </div>
 
           <!-- Submit Button -->
-          <button type="submit" class="btn btn-primary btn-full">
+          <button type="submit" id="login-btn" class="btn btn-primary btn-full">
             <i class="fa-solid fa-right-to-bracket"></i> Login
           </button>
+
+          <!-- Message Box - hidden by default -->
+          <!-- Shows green on success, red on wrong credentials -->
+          <div id="msg-box" style="
+            display: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-top: 14px;
+          "></div>
 
         </form>
 
@@ -207,6 +219,8 @@
     <p>Copyright 2026 <strong>Digital Mandi</strong>. All Rights Reserved.</p>
   </footer>
 
+  <!-- JS file - always at bottom before </body> -->
+  <script src="../js/login.js"></script>
 
 </body>
 </html>

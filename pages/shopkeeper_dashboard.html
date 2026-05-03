@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopkeeper Dashboard - Digital Mandi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-logo">
+                <i class="fa-solid fa-seedling"></i>
+                Digital Mandi
+            </div>
+            <div class="navbar-user">
+                <span><i class="fa-solid fa-store"></i> Shopkeeper Dashboard</span>
+                <a href="../api/auth/logout.php" class="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="sidebar-item active" onclick="showSection('section-overview', this)">
+                    <i class="fa-solid fa-gauge"></i> Overview
+                </li>
+                <li class="sidebar-item" onclick="showSection('section-products', this)">
+                    <i class="fa-solid fa-boxes-stacked"></i> My Products
+                </li>
+                <li class="sidebar-item" onclick="showSection('section-fertilizers', this)">
+                    <i class="fa-solid fa-flask"></i> Fertilizers List
+                </li>
+                <li class="sidebar-item" onclick="showSection('section-seeds', this)">
+                    <i class="fa-solid fa-leaf"></i> Seeds List
+                </li>
+                <div class="sidebar-divider"></div>
+                <li class="sidebar-item" onclick="showSection('section-orders', this)">
+                    <i class="fa-solid fa-cart-shopping"></i> Orders
+                </li>
+                <li class="sidebar-item" onclick="showSection('section-prices', this)">
+                    <i class="fa-solid fa-chart-line"></i> Market Prices
+                </li>
+                <div class="sidebar-divider"></div>
+                <li class="sidebar-item" onclick="showSection('section-profile', this)">
+                    <i class="fa-solid fa-user"></i> My Profile
+                </li>
+            </ul>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+
+            <!-- SECTION 1: OVERVIEW -->
+            <div id="section-overview" class="section-content">
+                <div class="page-header">
+                    <div>
+                        <h2>Welcome Back, Shopkeeper!</h2>
+                        <p>Manage your fertilizers and seeds on Digital Mandi</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="showSection('section-products', null); showAddForm();">
+                        <i class="fa-solid fa-plus"></i> Add New Product
+                    </button>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fa-solid fa-boxes-stacked"></i></div>
+                        <div>
+                            <div class="stat-num" id="stat-total">0</div>
+                            <div class="stat-label">Total Products</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gold"><i class="fa-solid fa-flask"></i></div>
+                        <div>
+                            <div class="stat-num" id="stat-fertilizers">0</div>
+                            <div class="stat-label">Fertilizers</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fa-solid fa-leaf"></i></div>
+                        <div>
+                            <div class="stat-num" id="stat-seeds">0</div>
+                            <div class="stat-label">Seeds</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red"><i class="fa-solid fa-circle-xmark"></i></div>
+                        <div>
+                            <div class="stat-num" id="stat-outofstock">0</div>
+                            <div class="stat-label">Out of Stock</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick cards -->
+                <div class="form-row-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4><i class="fa-solid fa-boxes-stacked"></i> Recent Products</h4>
+                            <button class="btn btn-sm btn-outline" onclick="showSection('section-products', null)">View
+                                All</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-boxes-stacked"></i>
+                                <p>No products added yet</p>
+                                <button class="btn btn-primary btn-sm"
+                                    onclick="showSection('section-products', null); showAddForm();">Add First
+                                    Product</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h4><i class="fa-solid fa-chart-line"></i> Govt. Approved Prices</h4>
+                        </div>
+                        <div class="card-body" style="padding:0;">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Govt. Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>DAP Fertilizer</td>
+                                        <td>Rs. 9,400 / 50kg bag</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Urea Fertilizer</td>
+                                        <td>Rs. 3,500 / 50kg bag</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SOP Fertilizer</td>
+                                        <td>Rs. 7,800 / 50kg bag</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Wheat Seed (Certified)</td>
+                                        <td>Rs. 4,200 / 40kg bag</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rice Seed (Certified)</td>
+                                        <td>Rs. 5,500 / 25kg bag</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SECTION 2: MY PRODUCTS (CRUD) -->
+            <div id="section-products" class="section-content" style="display:none;">
+                <div class="page-header">
+                    <div>
+                        <h2>My Product Listings</h2>
+                        <p>Add, edit or remove your fertilizer and seed products</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="showAddForm()">
+                        <i class="fa-solid fa-plus"></i> Add New Product
+                    </button>
+                </div>
+
+                <!-- Add / Edit Form -->
+                <div class="card" id="product-form-card" style="display:none;">
+                    <div class="card-header">
+                        <h4><i class="fa-solid fa-boxes-stacked"></i> <span id="form-title">Add New Product</span></h4>
+                        <button class="btn btn-sm btn-outline" onclick="hideForm()">
+                            <i class="fa-solid fa-xmark"></i> Cancel
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <form id="productForm" onsubmit="handleProductSubmit(event)">
+
+                            <input type="hidden" id="product_id" name="product_id" value="" />
+
+                            <div class="form-row-3">
+                                <div class="form-group">
+                                    <label class="form-label">Product Name</label>
+                                    <select name="product_name" id="product_name" class="form-select" required>
+                                        <option value="">Select Product</option>
+                                        <optgroup label="── Fertilizers ──">
+                                            <option>DAP Fertilizer</option>
+                                            <option>Urea Fertilizer</option>
+                                            <option>SOP Fertilizer</option>
+                                            <option>NP Fertilizer</option>
+                                            <option>CAN Fertilizer</option>
+                                            <option>Potassium Sulphate (SOP)</option>
+                                            <option>Ammonium Sulphate</option>
+                                            <option>Zinc Sulphate</option>
+                                        </optgroup>
+                                        <optgroup label="── Seeds ──">
+                                            <option>Wheat Seed (Gandum Beej)</option>
+                                            <option>Rice Seed (Chawal Beej)</option>
+                                            <option>Cotton Seed (Kapas Beej)</option>
+                                            <option>Maize Seed (Makki Beej)</option>
+                                            <option>Sugarcane Bud (Ganna)</option>
+                                            <option>Sunflower Seed</option>
+                                            <option>Canola Seed</option>
+                                            <option>Potato Seed</option>
+                                            <option>Onion Seed</option>
+                                            <option>Tomato Seed</option>
+                                        </optgroup>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Category</label>
+                                    <select name="category" id="category" class="form-select" required>
+                                        <option value="">Select Category</option>
+                                        <option value="fertilizer">Fertilizer</option>
+                                        <option value="seed">Seed</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Brand / Company</label>
+                                    <input type="text" name="brand" id="brand" class="form-input"
+                                        placeholder="e.g. Engro, FFC, ICI" />
+                                </div>
+                            </div>
+
+                            <div class="form-row-3">
+                                <div class="form-group">
+                                    <label class="form-label">Quantity Available</label>
+                                    <input type="number" name="quantity" id="quantity" class="form-input"
+                                        placeholder="e.g. 100" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Unit</label>
+                                    <select name="unit" id="unit" class="form-select" required>
+                                        <option value="kg">kg</option>
+                                        <option value="bag">bag (50kg)</option>
+                                        <option value="sachet">sachet</option>
+                                        <option value="litre">litre</option>
+                                        <option value="packet">packet</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Price per Unit (Rs.)</label>
+                                    <input type="number" name="price" id="price" class="form-input"
+                                        placeholder="e.g. 9400" required />
+                                </div>
+                            </div>
+
+                            <div class="form-row-2">
+                                <div class="form-group">
+                                    <label class="form-label">Status</label>
+                                    <select name="status" id="status" class="form-select">
+                                        <option value="available">Available</option>
+                                        <option value="out_of_stock">Out of Stock</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Description (optional)</label>
+                                    <input type="text" name="description" id="description" class="form-input"
+                                        placeholder="Any extra details about this product..." />
+                                </div>
+                            </div>
+
+                            <div id="form-msg" class="msg-box"></div>
+
+                            <button type="submit" id="form-btn" class="btn btn-primary">
+                                <i class="fa-solid fa-floppy-disk"></i> Save Product
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Products Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fa-solid fa-list"></i> All My Products</h4>
+                    </div>
+                    <div class="card-body" style="padding:0;">
+                        <div id="products-container">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+                                <p>Loading your products...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SECTION 3: FERTILIZERS LIST (Reference) -->
+            <div id="section-fertilizers" class="section-content" style="display:none;">
+                <div class="page-header">
+                    <div>
+                        <h2>Famous Fertilizers in Pakistan</h2>
+                        <p>Reference list of widely used fertilizers for farmers</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="showSection('section-products', null); showAddForm();">
+                        <i class="fa-solid fa-plus"></i> Add to My Products
+                    </button>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fa-solid fa-flask"></i> Commonly Used Fertilizers</h4>
+                    </div>
+                    <div class="card-body" style="padding:0;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Fertilizer Name</th>
+                                    <th>Urdu Name</th>
+                                    <th>Type</th>
+                                    <th>Best For</th>
+                                    <th>Popular Brand</th>
+                                    <th>Approx. Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><strong>DAP</strong> (Di-Ammonium Phosphate)</td>
+                                    <td>ڈی اے پی</td>
+                                    <td><span class="badge badge-gold">Phosphate</span></td>
+                                    <td>Wheat, Rice, Cotton</td>
+                                    <td>Engro, FFC</td>
+                                    <td>Rs. 9,400 / 50kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><strong>Urea</strong></td>
+                                    <td>یوریا</td>
+                                    <td><span class="badge badge-green">Nitrogen</span></td>
+                                    <td>All crops</td>
+                                    <td>Elengy, FFC Sona</td>
+                                    <td>Rs. 3,500 / 50kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><strong>SOP</strong> (Sulphate of Potash)</td>
+                                    <td>ایس او پی</td>
+                                    <td><span class="badge badge-blue">Potash</span></td>
+                                    <td>Potato, Cotton, Fruits</td>
+                                    <td>ICI, Agritab</td>
+                                    <td>Rs. 7,800 / 50kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><strong>NP Fertilizer</strong></td>
+                                    <td>این پی کھاد</td>
+                                    <td><span class="badge badge-gold">Compound</span></td>
+                                    <td>Wheat, Sugarcane</td>
+                                    <td>Engro Zarkhez</td>
+                                    <td>Rs. 6,200 / 50kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td><strong>CAN</strong> (Calcium Ammonium Nitrate)</td>
+                                    <td>کیلشیم نائٹریٹ</td>
+                                    <td><span class="badge badge-green">Nitrogen</span></td>
+                                    <td>Vegetables, Fruits</td>
+                                    <td>Agritab, Fauji</td>
+                                    <td>Rs. 4,100 / 50kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td><strong>Ammonium Sulphate</strong></td>
+                                    <td>امونیم سلفیٹ</td>
+                                    <td><span class="badge badge-green">Nitrogen</span></td>
+                                    <td>Rice, Sugar Beet</td>
+                                    <td>FFC</td>
+                                    <td>Rs. 3,800 / 50kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td><strong>Zinc Sulphate</strong></td>
+                                    <td>زنک سلفیٹ</td>
+                                    <td><span class="badge badge-blue">Micronutrient</span></td>
+                                    <td>All crops (deficiency)</td>
+                                    <td>Agritab</td>
+                                    <td>Rs. 2,200 / 25kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td><strong>SSP</strong> (Single Super Phosphate)</td>
+                                    <td>ایس ایس پی</td>
+                                    <td><span class="badge badge-gold">Phosphate</span></td>
+                                    <td>Legumes, Oilseeds</td>
+                                    <td>Multiple brands</td>
+                                    <td>Rs. 2,800 / 50kg bag</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SECTION 4: SEEDS LIST (Reference) -->
+            <div id="section-seeds" class="section-content" style="display:none;">
+                <div class="page-header">
+                    <div>
+                        <h2>Famous Seeds in Pakistan</h2>
+                        <p>Reference list of certified and popular seeds for farmers</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="showSection('section-products', null); showAddForm();">
+                        <i class="fa-solid fa-plus"></i> Add to My Products
+                    </button>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fa-solid fa-leaf"></i> Certified & Popular Seeds</h4>
+                    </div>
+                    <div class="card-body" style="padding:0;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Seed Name</th>
+                                    <th>Urdu Name</th>
+                                    <th>Crop Type</th>
+                                    <th>Season</th>
+                                    <th>Popular Variety</th>
+                                    <th>Approx. Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><strong>Wheat Seed</strong></td>
+                                    <td>گندم بیج</td>
+                                    <td><span class="badge badge-green">Food Crop</span></td>
+                                    <td>Rabi (Oct–Nov)</td>
+                                    <td>Galaxy-13, Sehar-06, TD-1</td>
+                                    <td>Rs. 4,200 / 40kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><strong>Rice Seed</strong></td>
+                                    <td>چاول بیج</td>
+                                    <td><span class="badge badge-green">Food Crop</span></td>
+                                    <td>Kharif (May–Jun)</td>
+                                    <td>Basmati 515, Super Basmati</td>
+                                    <td>Rs. 5,500 / 25kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><strong>Cotton Seed</strong></td>
+                                    <td>کپاس بیج</td>
+                                    <td><span class="badge badge-gold">Cash Crop</span></td>
+                                    <td>Kharif (Apr–May)</td>
+                                    <td>IR-3701, CIM-573, Cyto</td>
+                                    <td>Rs. 1,800 / packet</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><strong>Maize Seed</strong></td>
+                                    <td>مکئی بیج</td>
+                                    <td><span class="badge badge-green">Food Crop</span></td>
+                                    <td>Kharif (Apr–May)</td>
+                                    <td>Pioneer 30Y87, DK-6142</td>
+                                    <td>Rs. 3,200 / 10kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td><strong>Sugarcane Bud</strong></td>
+                                    <td>گنا</td>
+                                    <td><span class="badge badge-gold">Cash Crop</span></td>
+                                    <td>Spring (Feb–Mar)</td>
+                                    <td>CPF-237, HSF-240</td>
+                                    <td>Rs. 850 / maund</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td><strong>Sunflower Seed</strong></td>
+                                    <td>سورج مکھی بیج</td>
+                                    <td><span class="badge badge-gold">Oilseed</span></td>
+                                    <td>Spring / Kharif</td>
+                                    <td>Hysun-33, SF-187</td>
+                                    <td>Rs. 2,400 / 5kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td><strong>Canola / Rapeseed</strong></td>
+                                    <td>سرسوں بیج</td>
+                                    <td><span class="badge badge-gold">Oilseed</span></td>
+                                    <td>Rabi (Sep–Oct)</td>
+                                    <td>Dunkeld, Oscar</td>
+                                    <td>Rs. 1,900 / 5kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td><strong>Potato Seed</strong></td>
+                                    <td>آلو بیج</td>
+                                    <td><span class="badge badge-blue">Vegetable</span></td>
+                                    <td>Rabi (Oct–Nov)</td>
+                                    <td>Cardinal, Diamant, Asterix</td>
+                                    <td>Rs. 6,000 / 50kg bag</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td><strong>Onion Seed</strong></td>
+                                    <td>پیاز بیج</td>
+                                    <td><span class="badge badge-blue">Vegetable</span></td>
+                                    <td>Both seasons</td>
+                                    <td>Phulkara, Desi Red</td>
+                                    <td>Rs. 900 / 500g packet</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td><strong>Tomato Seed</strong></td>
+                                    <td>ٹماٹر بیج</td>
+                                    <td><span class="badge badge-blue">Vegetable</span></td>
+                                    <td>Both seasons</td>
+                                    <td>Roma VF, First Class F1</td>
+                                    <td>Rs. 1,200 / 100g packet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SECTION 5: ORDERS -->
+            <div id="section-orders" class="section-content" style="display:none;">
+                <div class="page-header">
+                    <div>
+                        <h2>Customer Orders</h2>
+                        <p>Farmers interested in buying your products</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="empty-state">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <p>No orders received yet. Add products to start receiving orders!</p>
+                            <button class="btn btn-primary btn-sm" onclick="showSection('section-products', null)">Go to
+                                My Products</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SECTION 6: MARKET PRICES -->
+            <div id="section-prices" class="section-content" style="display:none;">
+                <div class="page-header">
+                    <div>
+                        <h2>Government Prices — Inputs</h2>
+                        <p>Official approved rates for fertilizers &amp; seeds — Last updated: April 2026</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body" style="padding:0;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Unit</th>
+                                    <th>Govt. Price (Rs.)</th>
+                                    <th>Category</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>DAP Fertilizer</td>
+                                    <td>50 kg bag</td>
+                                    <td><strong>9,400</strong></td>
+                                    <td><span class="badge badge-gold">Fertilizer</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Urea Fertilizer</td>
+                                    <td>50 kg bag</td>
+                                    <td><strong>3,500</strong></td>
+                                    <td><span class="badge badge-gold">Fertilizer</span></td>
+                                </tr>
+                                <tr>
+                                    <td>SOP Fertilizer</td>
+                                    <td>50 kg bag</td>
+                                    <td><strong>7,800</strong></td>
+                                    <td><span class="badge badge-gold">Fertilizer</span></td>
+                                </tr>
+                                <tr>
+                                    <td>NP Fertilizer</td>
+                                    <td>50 kg bag</td>
+                                    <td><strong>6,200</strong></td>
+                                    <td><span class="badge badge-gold">Fertilizer</span></td>
+                                </tr>
+                                <tr>
+                                    <td>CAN Fertilizer</td>
+                                    <td>50 kg bag</td>
+                                    <td><strong>4,100</strong></td>
+                                    <td><span class="badge badge-gold">Fertilizer</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Certified Wheat Seed</td>
+                                    <td>40 kg bag</td>
+                                    <td><strong>4,200</strong></td>
+                                    <td><span class="badge badge-green">Seed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Certified Rice Seed</td>
+                                    <td>25 kg bag</td>
+                                    <td><strong>5,500</strong></td>
+                                    <td><span class="badge badge-green">Seed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Cotton Seed (hybrid)</td>
+                                    <td>packet</td>
+                                    <td><strong>1,800</strong></td>
+                                    <td><span class="badge badge-green">Seed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Certified Maize Seed</td>
+                                    <td>10 kg bag</td>
+                                    <td><strong>3,200</strong></td>
+                                    <td><span class="badge badge-green">Seed</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SECTION 7: PROFILE -->
+            <div id="section-profile" class="section-content" style="display:none;">
+                <div class="page-header">
+                    <div>
+                        <h2>My Profile</h2>
+                        <p>Your shop account information</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="empty-state">
+                            <i class="fa-solid fa-store"></i>
+                            <p>Profile details coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>Copyright 2026 <strong>Digital Mandi</strong>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../js/shopkeeper_dashboard.js"></script>
+
+</body>
+
+</html>

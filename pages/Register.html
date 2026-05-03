@@ -82,7 +82,7 @@
 
 
       <!-- ── REGISTER FORM ── -->
-      <form action="" method="POST" class="reg-form">
+      <form id="regForm" onsubmit="handleRegister(event)" class="reg-form">
 
         <!--------------------------------------------
              COMMON FIELDS — sab roles ke liye same
@@ -315,11 +315,11 @@
           <div class="form-row-2">
             <div class="form-group">
               <label class="form-label">Password</label>
-              <input type="password" name="password" class="form-input" placeholder="Min 8 characters" required />
+              <input type="password" name="password" id="password" class="form-input" placeholder="Min 8 characters" required />
             </div>
             <div class="form-group">
               <label class="form-label">Confirm Password</label>
-              <input type="password" name="confirm_password" class="form-input" placeholder="Re-enter password" required />
+              <input type="password" name="confirm_password" id="confirm_password" class="form-input" placeholder="Re-enter password" required />
             </div>
           </div>
         </div>
@@ -334,9 +334,18 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary btn-full">
+        <button type="submit" id="reg-btn" class="btn btn-primary btn-full">
           <i class="fa-solid fa-user-plus"></i> Create My Account
         </button>
+
+        <!-- Message box -->
+        <div id="reg-msg" style="
+          display: none;
+          padding: 10px 14px;
+          border-radius: 8px;
+          font-size: 0.85rem;
+          margin-top: 14px;
+        "></div>
 
       </form>
 
@@ -362,6 +371,7 @@
     <p>Copyright 2026 <strong>Digital Mandi</strong>. All Rights Reserved.</p>
   </footer>
 
+  <script src="../js/register.js"></script>
 
 </body>
 </html>

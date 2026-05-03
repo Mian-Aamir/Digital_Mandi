@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buyer Dashboard - Digital Mandi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="navbar-logo">
+        <i class="fa-solid fa-seedling"></i>
+        Digital Mandi
+      </div>
+      <div class="navbar-user">
+        <span><i class="fa-solid fa-circle-user"></i> Buyer Dashboard</span>
+        <a href="../api/auth/logout.php" class="logout-btn">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li class="sidebar-item active" onclick="showSection('section-overview', this)">
+          <i class="fa-solid fa-gauge"></i> Overview
+        </li>
+        <li class="sidebar-item" onclick="showSection('section-browse', this)">
+          <i class="fa-solid fa-wheat-awn"></i> Browse Crops
+        </li>
+        <li class="sidebar-item" onclick="showSection('section-offers', this)">
+          <i class="fa-solid fa-handshake"></i> My Offers
+        </li>
+        <li class="sidebar-item" onclick="showSection('section-orders', this)">
+          <i class="fa-solid fa-box"></i> My Orders
+        </li>
+        <div class="sidebar-divider"></div>
+        <li class="sidebar-item" onclick="showSection('section-ratings', this)">
+          <i class="fa-solid fa-star"></i> Rate Farmers
+        </li>
+        <li class="sidebar-item" onclick="showSection('section-prices', this)">
+          <i class="fa-solid fa-chart-line"></i> Market Prices
+        </li>
+        <div class="sidebar-divider"></div>
+        <li class="sidebar-item" onclick="showSection('section-profile', this)">
+          <i class="fa-solid fa-user"></i> My Profile
+        </li>
+      </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+
+      <!-- SECTION 1: OVERVIEW -->
+      <div id="section-overview" class="section-content">
+
+        <div class="page-header">
+          <div>
+            <h2>Welcome Back, Buyer!</h2>
+            <p>Browse available crops and manage your purchases</p>
+          </div>
+          <button class="btn btn-primary" onclick="showSection('section-browse', null)">
+            <i class="fa-solid fa-magnifying-glass"></i> Browse Crops
+          </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fa-solid fa-wheat-awn"></i></div>
+            <div><div class="stat-num" id="stat-crops">0</div><div class="stat-label">Available Crops</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon gold"><i class="fa-solid fa-handshake"></i></div>
+            <div><div class="stat-num">0</div><div class="stat-label">Active Offers</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="fa-solid fa-box"></i></div>
+            <div><div class="stat-num">0</div><div class="stat-label">Orders Placed</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fa-solid fa-shield-halved"></i></div>
+            <div><div class="stat-num">Rs. 0</div><div class="stat-label">In Escrow</div></div>
+          </div>
+        </div>
+
+        <!-- Quick cards -->
+        <div class="form-row-2">
+          <div class="card">
+            <div class="card-header">
+              <h4><i class="fa-solid fa-wheat-awn"></i> Latest Crop Listings</h4>
+              <button class="btn btn-sm btn-outline" onclick="showSection('section-browse', null)">View All</button>
+            </div>
+            <div class="card-body" id="overview-crops">
+              <div class="empty-state">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                <p>Loading crops...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h4><i class="fa-solid fa-chart-line"></i> Today's Market Prices</h4>
+            </div>
+            <div class="card-body" style="padding:0;">
+              <table class="data-table">
+                <thead><tr><th>Crop</th><th>Govt. Price</th></tr></thead>
+                <tbody>
+                  <tr><td>Wheat (Gandum)</td><td>Rs. 3,900 / 40kg</td></tr>
+                  <tr><td>Rice - Basmati</td><td>Rs. 7,200 / 40kg</td></tr>
+                  <tr><td>Cotton (Kapas)</td><td>Rs. 8,500 / 40kg</td></tr>
+                  <tr><td>Sugarcane</td><td>Rs. 425 / 40kg</td></tr>
+                  <tr><td>Maize (Makki)</td><td>Rs. 2,100 / 40kg</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- SECTION 2: BROWSE CROPS -->
+      <div id="section-browse" class="section-content" style="display:none;">
+
+        <div class="page-header">
+          <div>
+            <h2>Browse Available Crops</h2>
+            <p>Find fresh crops directly from farmers at fair prices</p>
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-body" style="padding:16px 20px;">
+            <div class="form-row-3">
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">Filter by Crop</label>
+                <select id="filter-crop" class="form-select" onchange="loadCrops()">
+                  <option value="">All Crops</option>
+                  <option>Wheat (Gandum)</option>
+                  <option>Rice (Chawal)</option>
+                  <option>Cotton (Kapas)</option>
+                  <option>Sugarcane (Ganna)</option>
+                  <option>Maize (Makki)</option>
+                  <option>Vegetables</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">Filter by Location</label>
+                <input type="text" id="filter-location" class="form-input"
+                       placeholder="e.g. Faisalabad" oninput="loadCrops()" />
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">Sort By</label>
+                <select id="filter-sort" class="form-select" onchange="loadCrops()">
+                  <option value="newest">Newest First</option>
+                  <option value="price_low">Price: Low to High</option>
+                  <option value="price_high">Price: High to Low</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crops Grid -->
+        <div id="browse-crops-container">
+          <div class="empty-state">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <p>Loading available crops...</p>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- SECTION 3: MY OFFERS -->
+      <div id="section-offers" class="section-content" style="display:none;">
+        <div class="page-header">
+          <div><h2>My Offers</h2><p>Offers you have sent to farmers</p></div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="empty-state">
+              <i class="fa-solid fa-handshake"></i>
+              <p>No offers sent yet. Browse crops and send an offer!</p>
+              <button class="btn btn-primary btn-sm" onclick="showSection('section-browse', null)">Browse Crops</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- SECTION 4: MY ORDERS -->
+      <div id="section-orders" class="section-content" style="display:none;">
+        <div class="page-header">
+          <div><h2>My Orders</h2><p>Track your confirmed orders and delivery status</p></div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="empty-state">
+              <i class="fa-solid fa-box"></i>
+              <p>No orders yet. Orders will appear here after a deal is confirmed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- SECTION 5: RATE FARMERS -->
+      <div id="section-ratings" class="section-content" style="display:none;">
+
+        <div class="page-header">
+          <div>
+            <h2>Rate Farmers</h2>
+            <p>Share your experience to help other buyers</p>
+          </div>
+        </div>
+
+        <!-- Rating Form -->
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header">
+            <h4><i class="fa-solid fa-star"></i> Give Rating to a Farmer</h4>
+          </div>
+          <div class="card-body">
+            <form id="ratingForm" onsubmit="handleRatingSubmit(event)">
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label">Farmer Name / ID</label>
+                  <input type="text" name="farmer_name" id="farmer_name"
+                         class="form-input" placeholder="e.g. Ahmad Khan or Farmer ID" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Your Rating</label>
+                  <select name="rating" id="rating" class="form-select" required>
+                    <option value="">Select Rating</option>
+                    <option value="5">⭐⭐⭐⭐⭐ — Excellent (5/5)</option>
+                    <option value="4">⭐⭐⭐⭐ — Very Good (4/5)</option>
+                    <option value="3">⭐⭐⭐ — Good (3/5)</option>
+                    <option value="2">⭐⭐ — Fair (2/5)</option>
+                    <option value="1">⭐ — Poor (1/5)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Your Review</label>
+                <textarea name="review" id="review" class="form-input" rows="3"
+                          placeholder="Write your honest experience with this farmer..."
+                          style="resize:vertical;"></textarea>
+              </div>
+
+              <div id="rating-msg" class="msg-box"></div>
+
+              <button type="submit" id="rating-btn" class="btn btn-primary">
+                <i class="fa-solid fa-paper-plane"></i> Submit Rating
+              </button>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- Previous Ratings -->
+        <div class="card">
+          <div class="card-header">
+            <h4><i class="fa-solid fa-list"></i> Ratings You Have Given</h4>
+          </div>
+          <div class="card-body">
+            <div class="empty-state">
+              <i class="fa-solid fa-star"></i>
+              <p>You have not rated any farmer yet.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- SECTION 6: MARKET PRICES -->
+      <div id="section-prices" class="section-content" style="display:none;">
+        <div class="page-header">
+          <div><h2>Government Market Prices</h2><p>Official rates — Last updated: March 2026</p></div>
+        </div>
+        <div class="card">
+          <div class="card-body" style="padding:0;">
+            <table class="data-table">
+              <thead>
+                <tr><th>Crop / Product</th><th>Unit</th><th>Govt. Price (Rs.)</th><th>Category</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Wheat (Gandum)</td><td>40 kg</td><td><strong>3,900</strong></td><td><span class="badge badge-green">Crop</span></td></tr>
+                <tr><td>Rice - Basmati</td><td>40 kg</td><td><strong>7,200</strong></td><td><span class="badge badge-green">Crop</span></td></tr>
+                <tr><td>Sugarcane (Ganna)</td><td>40 kg</td><td><strong>425</strong></td><td><span class="badge badge-green">Crop</span></td></tr>
+                <tr><td>Cotton (Kapas)</td><td>40 kg</td><td><strong>8,500</strong></td><td><span class="badge badge-green">Crop</span></td></tr>
+                <tr><td>Maize (Makki)</td><td>40 kg</td><td><strong>2,100</strong></td><td><span class="badge badge-green">Crop</span></td></tr>
+                <tr><td>DAP Fertilizer</td><td>50 kg bag</td><td><strong>9,400</strong></td><td><span class="badge badge-gold">Fertilizer</span></td></tr>
+                <tr><td>Urea Fertilizer</td><td>50 kg bag</td><td><strong>3,500</strong></td><td><span class="badge badge-gold">Fertilizer</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- SECTION 7: PROFILE -->
+      <div id="section-profile" class="section-content" style="display:none;">
+        <div class="page-header">
+          <div><h2>My Profile</h2><p>Your account information</p></div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="empty-state">
+              <i class="fa-solid fa-user"></i>
+              <p>Profile details coming soon.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Copyright 2026 <strong>Digital Mandi</strong>. All Rights Reserved.</p>
+  </footer>
+
+  <script src="../js/buyer_dashboard.js"></script>
+</body>
+</html>
